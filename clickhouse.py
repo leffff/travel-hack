@@ -8,7 +8,7 @@ class ClickHouse:
         self.client = client
         
     def preprocess_images_df(self, images_df, embeddings):
-        images_df["Image_id"] = [k for k in range(0, images_df.shape[0])]
+        images_df["id"] = [k for k in range(0, images_df.shape[0])]
         images_df["embedding"] = embeddings.tolist()
         images_df["path"] = images_df["path"]
         images_df.to_json("images+embeddings.json")
@@ -27,7 +27,7 @@ class ClickHouse:
             i_str = str(i)
 
             row = {
-                "Image_id": ids[i_str],
+                "id": ids[i_str],
                 "path": paths[i_str],
                 "embedding": embeddings[i_str],
             }
@@ -42,17 +42,18 @@ class ClickHouse:
     def add(self, df, embeddings):
         insert_info = self.preprocess_images_df(df, embeddings)
         self.client.execute(
-            "INSERT INTO images_embeddings_db (Image_id, path, embedding) VALUES",
+            "INSERT INTO images_embeddings_db (id, path, embedding) VALUES",
             insert_info,
         )
 
     def _click_to_pd_images(self, click_out):
-        df = pd.DataFrame(columns=["path",  "cos"], data=click_out)
+        df = pd.DataFrame(columns=["id", "path",  "cos"], data=click_out)
         return df
 
     def retrieve(self, embedding, table: str = 'images_embeddings_db', order_by="score", k: int = 1):
         request = f"""
             SELECT
+            id
             path,
             cosineDistance(embedding, {str(embedding[0].tolist())}) AS score
             FROM {table}
