@@ -1,5 +1,3 @@
-#import ssl
-#ssl._create_default_https_context = ssl._create_unverified_context
 #!pip install git+https://github.com/0xb1b1/yandexfreetranslate.git@fix/lang-code-len-verification
 
 

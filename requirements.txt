@@ -8,4 +8,3 @@ ruclip==0.0.2
 matplotlib
 seaborn
 requests
-socks
