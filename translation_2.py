@@ -1,13 +1,14 @@
 #libretranslate [args]
 
-const res = await fetch("https://libretranslate.com/translate", {
-  method: "POST",
-  body: JSON.stringify({
-    q: "Ciao!",
-    source: "auto",
-    target: "en"
-  }),
-  headers: { "Content-Type": "application/json" }
-});
+from libretranslatepy import LibreTranslateAPI
 
-console.log(await res.json());
+lt = LibreTranslateAPI("https://translate.argosopentech.com/")
+
+print(lt.translate("LibreTranslate is awesome!", "en", "es"))
+# LibreTranslate es impresionante!
+
+print(lt.detect("Hello World"))
+# [{"confidence": 0.6, "language": "en"}]
+
+print(lt.languages())
+# [{"code":"en", "name":"English"}
