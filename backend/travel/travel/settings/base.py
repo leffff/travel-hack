@@ -15,7 +15,7 @@ import os
 
 from YamJam import yamjam
 
-YAML_CONFIG = yamjam('backend/travel/travel/settings/config.yaml')['django']
+YAML_CONFIG = yamjam('travel/settings/config.yaml')['django']
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -28,6 +28,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    "photobank",
+
     "home",
     "search",
     "wagtail.contrib.forms",
@@ -49,6 +51,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "storages",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -146,7 +150,8 @@ MEDIA_URL = "/media/"
 # See https://docs.djangoproject.com/en/5.0/ref/settings/#std-setting-STORAGES
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {},  # depends on environment
     },
     # ManifestStaticFilesStorage is recommended in production, to prevent
     # outdated JavaScript / CSS assets being served from cache
@@ -161,6 +166,13 @@ STORAGES = {
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "travel"
+#
+# WAGTAIL_I18N_ENABLED = True
+#
+# WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+#     ('en', "English"),
+#     ('ru', "Русский"),
+# ]
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
@@ -173,3 +185,7 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+
+# PhotoBank
+WAGTAILIMAGES_IMAGE_MODEL = 'photobank.Photo'

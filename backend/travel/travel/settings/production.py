@@ -8,6 +8,9 @@ DATABASES = {
     'default': YAML_CONFIG['DATABASES']['prod'],
 }
 
+STORAGES['default']['OPTIONS'] = YAML_CONFIG['STORAGES']['S3']['prod']
+
+
 try:
     from .local import *
 except ImportError:

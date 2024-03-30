@@ -14,6 +14,8 @@ DATABASES = {
     'default': YAML_CONFIG['DATABASES']['dev'],
 }
 
+STORAGES['default']['OPTIONS'] = YAML_CONFIG['STORAGES']['S3']['dev']
+
 
 try:
     from .local import *
