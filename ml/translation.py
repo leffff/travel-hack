@@ -1,16 +1,13 @@
-#!pip install git+https://github.com/0xb1b1/yandexfreetranslate.git@fix/lang-code-len-verification
+#!pip install libretranslatepy
 
+from libretranslatepy import LibreTranslateAPI
+#link = "https://01b3-109-252-98-213.ngrok-free.app"
+class Translator:
+  def __init__(self, link):
+    self.translator = LibreTranslateAPI(link)
 
-from yandexfreetranslate import YandexFreeTranslate
+  def detect_lang(self, text):
+    return (self.translator.detect("Hello World"))[0]['language']
 
-yt = YandexFreeTranslate(api="ios")
-
-
-def translate(text: str, source: str = "en", target: str = "ru") -> str:
-    return yt.translate(
-        source=source,
-        target=target,
-        text=text,
-    )
-
-translate('how old are you?')
+  def translate(self, input_text, input_lang_id, output_lang_id):
+    return (self.translator.translate(input_text, input_lang_id, output_lang_id))
