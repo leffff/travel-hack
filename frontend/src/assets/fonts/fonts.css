@@ -1,0 +1,6 @@
+@font-face {
+	font-family: 'SuisseIntl';
+	src: url('./suisseintl.woff2') format('woff2'), /* Super Modern Browsers */
+		url('./suisseintl.ttf') format('truetype'), /* Safari, Android, iOS */
+		url('./suisseintl.svg#suisseintl') format('svg'); /* Chrome < 4, Legacy iOS */
+}

@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+}
+
+.section {
+  @apply w-full flex max-w-7xl mx-auto px-2 sm:px-6;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  font-family: 'SuisseIntl', sans-serif;
+}
