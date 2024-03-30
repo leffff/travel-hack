@@ -1,0 +1,5 @@
+Django>=4.2,<5.1
+wagtail>=6.0,<6.1
+yamjam==0.1.7
+psycopg2==2.9.9
+psycopg2-binary==2.9.9
