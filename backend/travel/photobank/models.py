@@ -11,10 +11,16 @@ class Photo(AbstractImage):
         DELETED = 'DEL'
 
     status = models.CharField(max_length=3, choices=PhotoStatus, default=PhotoStatus.NEW)
+    deleted = models.BooleanField(default=False)
 
-    admin_form_fields = Image.admin_form_fields + (
-        #  custom_fields
-    )
+    # admin_form_fields = tuple(filter(lambda item: item not in ('tags', ),
+    #                                  Image.admin_form_fields))
+    admin_form_fields = Image.admin_form_fields
+
+    def delete(self, *args, **kwargs):
+        self.deleted = True
+        # TODO: delete in clickhouse
+        self.save(update_fields=('deleted', ))
 
 
 class PhotoRendition(AbstractRendition):

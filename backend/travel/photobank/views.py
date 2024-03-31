@@ -5,5 +5,5 @@ from photobank.serializers import PhotoSerializer
 
 
 class PhotoViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Photo.objects.filter()
+    queryset = Photo.objects.filter(deleted=False)
     serializer_class = PhotoSerializer
