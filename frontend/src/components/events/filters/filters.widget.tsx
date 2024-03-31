@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { FilterGroupViewModel } from "@/components/events/filters/filter-group.store";
 import { CheckmarkWithLabel } from "../../ui/Checkmark";
 import { EventFiltersViewModel } from "./filters.vm";
+import { useEffect, useRef } from "react";
 
 const FilterGroup = observer(<T extends string>({ vm }: { vm: FilterGroupViewModel<T> }) => {
   return (
@@ -25,10 +26,16 @@ const FilterGroup = observer(<T extends string>({ vm }: { vm: FilterGroupViewMod
 });
 
 export const EventFilters: FCVM<EventFiltersViewModel> = observer(({ vm }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // scroll above filters
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [vm.showFilters]);
   if (!vm.showFilters) return;
 
   return (
-    <div className="flex p-6 bg-button-accent w-full gap-6 rounded-2xl">
+    <div ref={ref} className="flex p-6 bg-button-accent w-full gap-6 rounded-2xl">
       <FilterGroup vm={vm.timeOfYear} />
       <FilterGroup vm={vm.timeOfDay} />
       <FilterGroup vm={vm.screenOrientation} />
