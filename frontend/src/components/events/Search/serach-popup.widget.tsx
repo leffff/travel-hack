@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { FC, useEffect, useRef, useState } from "react";
 import { SearchPopupViewModel } from "./search-popup.vm";
 import { cn } from "@/lib/utils/cn";
-import { Spinner } from "../ui/Spinner";
+import { Spinner } from "../../ui/Spinner";
 import { useClickOutside } from "@/lib/hooks/useClickOutside";
 import { ELEVATION } from "@/lib/constants/elevation";
 

@@ -49,7 +49,7 @@ export const useBreadcrumb = (element: ReactElement | string, to: Routes, level:
 
     // Cleanup function
     return () => {
-      setItems((prevItems) => prevItems.filter((item, index) => index !== level));
+      setItems((prevItems) => prevItems.filter((_, index) => index !== level));
     };
   }, [element, to, level, setItems]);
   return null;

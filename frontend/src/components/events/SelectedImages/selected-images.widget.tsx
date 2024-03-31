@@ -1,12 +1,12 @@
 import { EventsViewModel } from "@/stores/events.store";
 import { FCVM } from "@/utils/vm";
 import { observer } from "mobx-react-lite";
-import { Button } from "../ui/Button";
+import { Button } from "../../ui/Button";
 import DownloadIcon from "@/assets/icons/download.svg";
 import { useState } from "react";
-import { DialogBase } from "../ui/Dialog";
+import { DialogBase } from "../../ui/Dialog";
 import { convertFileSize } from "@/lib/utils/convert-file-size";
-import { Checkmark, CheckmarkWithLabel } from "../ui/Checkmark";
+import { Checkmark, CheckmarkWithLabel } from "../../ui/Checkmark";
 
 const pluralize = (count: number) => {
   const lastDigit = count % 10;

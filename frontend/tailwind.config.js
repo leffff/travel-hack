@@ -36,7 +36,8 @@ module.exports = {
         },
         checkbox: {
           border: "#A6A6A6"
-        }
+        },
+        natural2: "#2F2F2F"
       },
       fontFamily: {
         grotesk: ["'Proto Grotesk'", "SuisseIntl", "sans-serif"]

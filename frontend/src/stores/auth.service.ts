@@ -70,18 +70,6 @@ class AuthServiceViewModel {
     this.auth = { state: "anonymous" };
     removeStoredAuthToken();
   }
-
-  async updatePassword(token: string, newPassword: string) {
-    try {
-      await AuthEndpoint.resetPassword(token, newPassword);
-
-      const user = await UserEndpoint.current();
-      this.auth = { state: "authenticated", user };
-      return true;
-    } catch {
-      return false;
-    }
-  }
 }
 
 export const AuthService = new AuthServiceViewModel();

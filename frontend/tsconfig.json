@@ -19,7 +19,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["@yandex/ymaps3-types"],
     
     "baseUrl": ".",
     "paths": {

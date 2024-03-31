@@ -18,7 +18,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["sunset", "beach", "nature"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/sunset-beach.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [34.0195, -118.4912],
     fileSize: 1023
   },
@@ -28,7 +29,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["city", "night", "lights"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/city-night.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [40.7128, -74.006],
     fileSize: 1023
   },
@@ -38,7 +40,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["mountain", "hike", "adventure"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/mountain-hike.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [39.7392, -104.9903],
     fileSize: 1023
   },
@@ -48,7 +51,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["autumn", "forest", "path"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/autumn-forest.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [48.8566, 2.3522],
     fileSize: 1023
   },
@@ -58,7 +62,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["snow", "mountain", "peak"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/snowy-mountain.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [45.8288, -110.5795],
     fileSize: 1023
   },
@@ -68,7 +73,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["sunset", "beach", "nature"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/sunset-beach.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [34.0195, -118.4912],
     fileSize: 1023
   },
@@ -78,7 +84,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["city", "night", "lights"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/city-night.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [40.7128, -74.006],
     fileSize: 1023
   },
@@ -88,7 +95,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["mountain", "hike", "adventure"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/mountain-hike.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [39.7392, -104.9903],
     fileSize: 1023
   },
@@ -98,7 +106,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["autumn", "forest", "path"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/autumn-forest.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [48.8566, 2.3522],
     fileSize: 1023
   },
@@ -108,7 +117,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["snow", "mountain", "peak"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/snowy-mountain.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [45.8288, -110.5795],
     fileSize: 1023
   },
@@ -118,7 +128,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["sunset", "beach", "nature"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/sunset-beach.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [34.0195, -118.4912],
     fileSize: 1023
   },
@@ -128,7 +139,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["city", "night", "lights"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/city-night.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [40.7128, -74.006],
     fileSize: 1023
   },
@@ -138,7 +150,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["mountain", "hike", "adventure"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/mountain-hike.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [39.7392, -104.9903],
     fileSize: 1023
   },
@@ -148,7 +161,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["autumn", "forest", "path"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/autumn-forest.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [48.8566, 2.3522],
     fileSize: 1023
   },
@@ -158,7 +172,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["snow", "mountain", "peak"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/snowy-mountain.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [45.8288, -110.5795],
     fileSize: 1023
   },
@@ -168,7 +183,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["sunset", "beach", "nature"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/sunset-beach.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [34.0195, -118.4912],
     fileSize: 1023
   },
@@ -178,7 +194,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["city", "night", "lights"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/city-night.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [40.7128, -74.006],
     fileSize: 1023
   },
@@ -188,7 +205,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["mountain", "hike", "adventure"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/mountain-hike.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [39.7392, -104.9903],
     fileSize: 1023
   },
@@ -198,7 +216,8 @@ export const mockImages: ImageDto.Item[] = [
     tags: ["autumn", "forest", "path"],
     extension: "jpg",
     resolution: [1920, 1080],
-    imgSrc: "https://example.com/img/autumn-forest.jpg",
+    imgSrc:
+      "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg",
     location: [48.8566, 2.3522],
     fileSize: 1023
   }

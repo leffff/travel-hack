@@ -1,5 +1,6 @@
 import { useBreadcrumb } from "@/components/Breadcrumbs/Breadcrumbs";
 import { UserHeader } from "@/components/UserHeader";
+import { EventsViewModel } from "@/stores/events.store";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
 const Page = () => {

@@ -1,12 +1,13 @@
 import { useBreadcrumb } from "@/components/Breadcrumbs/Breadcrumbs";
-import { ImageFeed } from "@/components/ImageFeed/image-feed.widget";
-import { EventFilters } from "@/components/filters/filters.widget";
-import { SearchWidget } from "@/components/Search/search.widget";
-import { SelectedImages } from "@/components/SelectedImages/selected-images.widget";
+import { ImageFeed } from "@/components/events/ImageFeed/image-feed.widget";
+import { EventFilters } from "@/components/events/filters/filters.widget";
+import { SearchWidget } from "@/components/events/Search/search.widget";
+import { SelectedImages } from "@/components/events/SelectedImages/selected-images.widget";
 import { EventsViewModel } from "@/stores/events.store";
-import { Outlet, createLazyFileRoute } from "@tanstack/react-router";
+import { createLazyFileRoute } from "@tanstack/react-router";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
+import { ImageCarousel } from "@/components/events/ImageCarousel/image-carousel.widget";
 
 const Page = observer(() => {
   const [vm] = useState(() => new EventsViewModel());
@@ -19,7 +20,7 @@ const Page = observer(() => {
       <ImageFeed vm={vm} />
       <div className="h-10" />
       <SelectedImages vm={vm} />
-      <Outlet />
+      <ImageCarousel vm={vm} />
     </div>
   );
 });

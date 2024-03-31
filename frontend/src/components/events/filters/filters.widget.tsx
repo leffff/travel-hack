@@ -1,7 +1,7 @@
 import { FCVM } from "@/utils/vm";
 import { observer } from "mobx-react-lite";
-import { FilterGroupViewModel } from "@/components/filters/filter-group.store";
-import { CheckmarkWithLabel } from "../ui/Checkmark";
+import { FilterGroupViewModel } from "@/components/events/filters/filter-group.store";
+import { CheckmarkWithLabel } from "../../ui/Checkmark";
 import { EventFiltersViewModel } from "./filters.vm";
 
 const FilterGroup = observer(<T extends string>({ vm }: { vm: FilterGroupViewModel<T> }) => {

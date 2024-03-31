@@ -3,7 +3,7 @@ import { EventsViewModel } from "@/stores/events.store";
 import { observer } from "mobx-react-lite";
 import { FC } from "react";
 import { cn } from "@/lib/utils/cn";
-import { Checkmark } from "../ui/Checkmark";
+import { Checkmark } from "../../ui/Checkmark";
 
 interface Props {
   images: ImageDto.Item[];
@@ -38,11 +38,9 @@ export const ImageRow: FC<Props> = observer((x) => {
                 "h-[248px] row-span-1 [&:nth-child(3)]:row-span-2 [&:nth-child(3)]:h-[500px]"
             )}>
             <img
-              // src={image.imgSrc}
-              src={
-                "https://mimer.ru/content/ckfinder/userfiles/images/%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B0%D1%8F.jpeg"
-              }
+              src={image.imgSrc}
               alt={image.title}
+              loading="lazy"
               className={cn(
                 "object-cover w-full h-full rounded-lg border-2 border-transparent",
                 isSelected && "border-primary"

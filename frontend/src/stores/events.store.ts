@@ -1,6 +1,6 @@
 import { ImageDto, mockImages } from "@/api/models/image.model";
-import { SearchViewModel } from "@/components/Search/serach.vm";
-import { EventFiltersViewModel } from "@/components/filters/filters.vm";
+import { SearchViewModel } from "@/components/events/Search/serach.vm";
+import { EventFiltersViewModel } from "@/components/events/filters/filters.vm";
 import { ImageGrid, groupImagesIntoGrids } from "@/lib/utils/group-image";
 import { makeAutoObservable } from "mobx";
 
@@ -23,7 +23,7 @@ export class EventsViewModel {
   }
 
   openImage(image: ImageDto.Item) {
-    console.log("open image", image);
+    this.expandedImage = image;
   }
 
   toggleImage(image: ImageDto.Item) {

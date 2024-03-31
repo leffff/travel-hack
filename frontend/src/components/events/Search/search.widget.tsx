@@ -5,7 +5,7 @@ import SearchIcon from "@/assets/icons/search.svg";
 import CrossIcon from "@/assets/icons/cross.svg";
 import FiltersIcon from "@/assets/icons/filters.svg";
 import { useRef } from "react";
-import { Button } from "../ui/Button";
+import { Button } from "../../ui/Button";
 import { SearchPopup } from "./serach-popup.widget";
 import { ELEVATION } from "@/lib/constants/elevation";
 
