@@ -1,0 +1,15 @@
+@font-face {
+	font-family: 'SuisseIntl';
+	src: url('./suisseintl.woff2') format('woff2'), /* Super Modern Browsers */
+		url('./suisseintl.ttf') format('truetype'), /* Safari, Android, iOS */
+		url('./suisseintl.svg#suisseintl') format('svg'); /* Chrome < 4, Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Proto Grotesk';
+    src: url('./ProtoGroteskWeb-Regular.woff2') format('woff2'),
+        url('./ProtoGroteskWeb-Regular.woff') format('woff'),
+        url('./ProtoGroteskWeb-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
