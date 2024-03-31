@@ -6,6 +6,8 @@ import nltk
 from nltk.corpus import stopwords
 #nltk.download('stopwords')
 #print(stops)
+
+
 class Tagger:
     def __init__(self, tagger_id, torch_dtype=torch.float16):
         self.dtype = torch_dtype

@@ -7,7 +7,7 @@ class Translator:
     self.translator = LibreTranslateAPI(link)
 
   def detect_lang(self, text):
-    return (self.translator.detect("Hello World"))[0]['language']
+    return (self.translator.detect(text))[0]['language']
 
   def translate(self, input_text, input_lang_id, output_lang_id):
     return (self.translator.translate(input_text, input_lang_id, output_lang_id))
