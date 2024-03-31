@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 import ChevronIcon from "@/assets/icons/chevron.svg";
 
 interface Props {

@@ -14,11 +14,15 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as NavImport } from './routes/_nav'
+import { Route as NavEventsImport } from './routes/_nav/_events'
 
 // Create Virtual Routes
 
 const LoginLazyImport = createFileRoute('/login')()
 const NavIndexLazyImport = createFileRoute('/_nav/')()
+const NavEventsEventsIndexLazyImport = createFileRoute(
+  '/_nav/_events/events/',
+)()
 
 // Create/Update Routes
 
@@ -37,6 +41,18 @@ const NavIndexLazyRoute = NavIndexLazyImport.update({
   getParentRoute: () => NavRoute,
 } as any).lazy(() => import('./routes/_nav/index.lazy').then((d) => d.Route))
 
+const NavEventsRoute = NavEventsImport.update({
+  id: '/_events',
+  getParentRoute: () => NavRoute,
+} as any)
+
+const NavEventsEventsIndexLazyRoute = NavEventsEventsIndexLazyImport.update({
+  path: '/events/',
+  getParentRoute: () => NavEventsRoute,
+} as any).lazy(() =>
+  import('./routes/_nav/_events/events/index.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -49,9 +65,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
+    '/_nav/_events': {
+      preLoaderRoute: typeof NavEventsImport
+      parentRoute: typeof NavImport
+    }
     '/_nav/': {
       preLoaderRoute: typeof NavIndexLazyImport
       parentRoute: typeof NavImport
+    }
+    '/_nav/_events/events/': {
+      preLoaderRoute: typeof NavEventsEventsIndexLazyImport
+      parentRoute: typeof NavEventsImport
     }
   }
 }
@@ -59,7 +83,10 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  NavRoute.addChildren([NavIndexLazyRoute]),
+  NavRoute.addChildren([
+    NavEventsRoute.addChildren([NavEventsEventsIndexLazyRoute]),
+    NavIndexLazyRoute,
+  ]),
   LoginLazyRoute,
 ])
 

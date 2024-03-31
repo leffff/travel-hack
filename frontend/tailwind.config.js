@@ -23,11 +23,26 @@ module.exports = {
       colors: {
         primary: "#FFCF08",
         bg: {
-          DEFAULT: "#1D1D1D"
+          DEFAULT: "#1D1D1D",
+          content: "#F5F5F5"
         },
         text: {
-          DEFAULT: ""
+          DEFAULT: "#1D1D1D",
+          secondary: "#747474"
+        },
+        button: {
+          accent: "#EBEBEB",
+          outline: "#D9D9D9"
+        },
+        checkbox: {
+          border: "#A6A6A6"
         }
+      },
+      fontFamily: {
+        grotesk: ["'Proto Grotesk'", "SuisseIntl", "sans-serif"]
+      },
+      boxShadow: {
+        dropdown: "0px 4px 30px 0px rgba(148, 148, 148, 0.25)"
       }
     }
   }

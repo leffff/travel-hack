@@ -27,7 +27,7 @@ const NavLink: FC<NavLinkProps> = (x) => {
 
 const Ribbon = (x: { children: ReactNode }) => {
   return (
-    <div className="absolute w-4 h-4 top-0 right-0 bg-primary text-[10px] text-bg flex items-center justify-center rounded-full pt-[3px]">
+    <div className="absolute w-4 h-4 top-0 right-0 bg-primary text-[10px] text-bg flex items-center justify-center rounded-full pt-[2px]">
       {x.children}
     </div>
   );
