@@ -1,14 +1,11 @@
 from functools import cached_property
 
-from django.forms import ImageField
 from django.forms.utils import flatatt
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
-from django_filters.widgets import BooleanWidget
 from wagtail import hooks
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel, Panel, PanelGroup
-from wagtail.images.components import ImageDisplay
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel, Panel
 from wagtail.images.shortcuts import get_rendition_or_not_found
 from wagtail_modeladmin.mixins import ThumbnailMixin
 from wagtail_modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register

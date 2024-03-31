@@ -32,7 +32,7 @@ class DeletedViewButtonHelper(BaseButtonHelper):
     def delete_button(self, pk, classnames_add=None, classnames_exclude=None):
         default = super().delete_button(pk, classnames_add, classnames_exclude)
         default.update({
-            "url": self.url_helper.get_action_url("delete", quote(pk)),  # TODO: recover
+            "url": self.url_helper.get_action_url("recover", quote(pk)),
             "label": _("Recover"),
             "title": _("Recover %(object)s") % {"object": self.verbose_name},
         })

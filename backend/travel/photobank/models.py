@@ -22,6 +22,11 @@ class Photo(AbstractImage):
         # TODO: delete in clickhouse
         self.save(update_fields=('deleted', ))
 
+    def recover(self):
+        self.deleted = False
+        # TODO: delete in clickhouse
+        self.save(update_fields=('deleted', ))
+
 
 class PhotoRendition(AbstractRendition):
     image = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='renditions')
