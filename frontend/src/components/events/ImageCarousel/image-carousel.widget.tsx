@@ -55,43 +55,45 @@ export const ImageCarousel: FCVM<EventsViewModel> = observer(({ vm }) => {
               <div className="flex-1 overflow-hidden">
                 <img src={image?.imgSrc} className="h-full mx-auto object-contain" />
               </div>
-              <div className="bg-natural2 px-6 py-4 w-full grid grid-cols-2 gap-8">
-                <div className="flex flex-col w-full gap-2">
-                  <div className="flex items-center gap-2">
-                    <h2>{image?.title}</h2>
-                    <span className="text-checkbox-border text-sm uppercase">
-                      {image?.extension}, {image?.resolution.join("x")}
-                    </span>
+              <div className="bg-natural2">
+                <div className="section py-4 w-full grid grid-cols-2 gap-8">
+                  <div className="flex flex-col w-full gap-2">
+                    <div className="flex items-center gap-2">
+                      <h2>{image?.title}</h2>
+                      <span className="text-checkbox-border text-sm uppercase">
+                        {image?.extension}, {image?.resolution.join("x")}
+                      </span>
+                    </div>
+                    <ul className="flex flex-wrap text-xs gap-1">
+                      {image?.tags.map((tag, index) => (
+                        <li
+                          key={index}
+                          className="bg-bg/15 px-2 py-1 flex rounded-md flex-wrap items-center justify-center font-medium">
+                          #{tag}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="flex flex-wrap text-xs gap-1">
-                    {image?.tags.map((tag, index) => (
-                      <li
-                        key={index}
-                        className="bg-bg/15 px-2 py-1 flex rounded-md flex-wrap items-center justify-center font-medium">
-                        #{tag}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex w-full gap-4 items-center">
-                  <div className="flex flex-col gap-1 text-xs text-wrap text-left">
-                    Обратите внимание на ограничения использования, установленные Лицензионным
-                    соглашением.
-                    <CheckmarkWithLabel
-                      checked
-                      label={
-                        <p>
-                          Соглашаюсь с условиями{" "}
-                          <span className="text-primary">Лицензионного соглашения</span>
-                        </p>
-                      }
-                    />
+                  <div className="flex w-full gap-4 items-center">
+                    <div className="flex flex-col gap-1 text-xs text-wrap text-left">
+                      Обратите внимание на ограничения использования, установленные Лицензионным
+                      соглашением.
+                      <CheckmarkWithLabel
+                        checked
+                        label={
+                          <p>
+                            Соглашаюсь с условиями{" "}
+                            <span className="text-primary">Лицензионного соглашения</span>
+                          </p>
+                        }
+                      />
+                    </div>
+                    <span className="h-full w-px bg-white/15" />
+                    <Button variant="accent" className="w-fit text-text text-nowrap items-center">
+                      {image && convertFileSize(image.fileSize)}
+                      <DownloadIcon className="size-6" />
+                    </Button>
                   </div>
-                  <span className="h-full w-px bg-white/15" />
-                  <Button variant="accent" className="w-fit text-text text-nowrap items-center">
-                    {image && convertFileSize(image.fileSize)}
-                    <DownloadIcon className="size-6" />
-                  </Button>
                 </div>
               </div>
             </Dialog.Panel>
