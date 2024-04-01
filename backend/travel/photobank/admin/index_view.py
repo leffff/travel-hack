@@ -20,6 +20,13 @@ class BaseButtonHelper(ButtonHelper):
     pass
 
 
+class IndexViewButtonHelper(BaseButtonHelper):
+    def add_button(self, classnames_add=None, classnames_exclude=None):
+        default = super().add_button()
+        default['url'] = self.url_helper.get_action_url('create_new')
+        return default
+
+
 class DeletedViewButtonHelper(BaseButtonHelper):
     delete_button_classnames = ["warning"]
 

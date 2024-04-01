@@ -10,8 +10,10 @@ from wagtail.images.shortcuts import get_rendition_or_not_found
 from wagtail_modeladmin.mixins import ThumbnailMixin
 from wagtail_modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 
-from photobank.admin.index_view import DeletedViewButtonHelper, PhotoAdminIndexView, DeletedPhotoAdminIndexView
-from photobank.admin.edit_view import DeletedPhotoEditView, PhotoEditView
+from photobank.admin.index_view import (
+    DeletedViewButtonHelper, IndexViewButtonHelper, PhotoAdminIndexView,
+    DeletedPhotoAdminIndexView,
+)
 from photobank.models import Photo
 from photobank.utils import human_size
 
@@ -31,7 +33,8 @@ class ImageDisplayPanel(ReadOnlyPanel):
                 self,
                 parent_context: "Optional[RenderContext]" = None,
         ) -> "SafeString":
-            return get_rendition_or_not_found(self.instance, 'original').img_tag()
+            if self.instance is not None:
+                return get_rendition_or_not_found(self.instance, 'original').img_tag()
 
 
 class HumanSizePanel(ReadOnlyPanel):
@@ -64,7 +67,6 @@ class BasePhotoAdmin(ThumbnailMixin, ModelAdmin):
         return mark_safe('<img{}>'.format(flatatt(img_attrs)))
 
     def display_tags(self, obj):
-        # Assuming `tags` is a ManyToManyField or similar in your model
         return format_html(', '.join([tag.name for tag in obj.tags.all()]) or '–')
 
     display_tags.short_description = _('Tags')
@@ -96,8 +98,8 @@ class PhotoAdmin(BasePhotoAdmin):
     menu_label = _('Actual photobank')
     menu_item_name = 'photos'
     index_view_class = PhotoAdminIndexView
-    edit_view_class = PhotoEditView
     base_url_path = 'photobank/photos'
+    button_helper_class = IndexViewButtonHelper
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -108,7 +110,6 @@ class DeletedPhotoAdmin(BasePhotoAdmin):
     menu_label = _('Deleted photos')
     menu_item_name = 'deleted_photos'
     index_view_class = DeletedPhotoAdminIndexView
-    edit_view_class = DeletedPhotoEditView
     base_url_path = 'photobank/deleted'
     button_helper_class = DeletedViewButtonHelper
 
