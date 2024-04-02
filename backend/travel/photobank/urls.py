@@ -10,6 +10,6 @@ router.register(r'photos', views.PhotoViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('deleted/recover/<int:pk>/', RecoverView.as_view(), name='photobank_deleted_modeladmin_recover'),
-    path('photos/create_new/', AddView.as_view(), name='photobank_photos_modeladmin_create_new'),
+    path('admin/photobank/deleted/recover/<int:pk>/', RecoverView.as_view(), name='photobank_deleted_modeladmin_recover'),
+    path('admin/photobank/photos/create_new/', AddView.as_view(), name='photobank_photos_modeladmin_create_new'),
 ]
