@@ -8,20 +8,24 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import { ImageCarousel } from "@/components/events/ImageCarousel/image-carousel.widget";
+import { Footer } from "@/components/Footer/footer.widget";
 
 const Page = observer(() => {
   const [vm] = useState(() => new EventsViewModel());
   useBreadcrumb("Фотографии", "/events", 2);
 
   return (
-    <div className="flex flex-col section text-text relative">
-      <SearchWidget vm={vm.searchVm} />
-      <EventFilters vm={vm.filtersVm} />
-      <ImageFeed vm={vm} />
-      <div className="h-10" />
-      <SelectedImages vm={vm} />
-      <ImageCarousel vm={vm} />
-    </div>
+    <>
+      <div className="flex flex-col section text-text relative">
+        <SearchWidget vm={vm.searchVm} />
+        <EventFilters vm={vm.filtersVm} />
+        <ImageFeed vm={vm} />
+        <div className="h-10" />
+        <SelectedImages vm={vm} />
+        <ImageCarousel vm={vm} />
+      </div>
+      <Footer />
+    </>
   );
 });
 

@@ -23,6 +23,7 @@ const pluralize = (count: number) => {
 
 export const SelectedImages: FCVM<EventsViewModel> = observer(({ vm }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
   if (vm.selectedImages.size === 0) return;
 
   return (
@@ -44,8 +45,11 @@ export const SelectedImages: FCVM<EventsViewModel> = observer(({ vm }) => {
           Скачать {pluralize(vm.selectedImages.size)}?
         </h1>
         <Button
+          disabled={!confirmed}
           className="justify-center w-full font-medium"
           onClick={() => {
+            if (!confirmed) return;
+
             vm.downloadSelectedImages();
             setShowConfirmModal(false);
           }}>
@@ -55,7 +59,8 @@ export const SelectedImages: FCVM<EventsViewModel> = observer(({ vm }) => {
         <div className="flex flex-col gap-1 mt-4 text-text-secondary text-xs text-wrap text-left">
           Обратите внимание на ограничения использования, установленные Лицензионным соглашением.
           <CheckmarkWithLabel
-            checked
+            checked={confirmed}
+            onClick={() => setConfirmed(!confirmed)}
             label={
               <p>
                 Соглашаюсь с условиями{" "}

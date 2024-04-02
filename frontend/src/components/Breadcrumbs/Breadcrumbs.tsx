@@ -59,14 +59,14 @@ export const Breadcrumbs = () => {
   const ctx = useContext(BreadcrumbsContext);
 
   return (
-    <ol className="flex section gap-2 text-text-secondary items-center">
+    <ol className="flex section gap-2 text-text-secondary items-center min-h-8 overflow-y-hidden overflow-x-auto text-nowrap">
       {ctx.items.map((v, i) => (
         <React.Fragment key={i}>
           <li>
             <Link to={v.to}>{v.element}</Link>
           </li>
           {i < ctx.items.length - 1 && (
-            <li className="size-1 bg-text-secondary rounded-full" aria-hidden />
+            <li className="size-1 min-w-1 bg-text-secondary rounded-full" aria-hidden />
           )}
         </React.Fragment>
       ))}

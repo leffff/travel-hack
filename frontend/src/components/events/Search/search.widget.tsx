@@ -30,7 +30,7 @@ export const SearchWidget: FCVM<SearchViewModel> = observer(({ vm }) => {
 
   return (
     <div
-      className="sticky top-0 w-full flex gap-2 bg-bg-content pt-6 pb-4"
+      className="sticky top-0 w-full flex flex-col md:flex-row gap-2 bg-bg-content pt-6 pb-4"
       style={{ zIndex: ELEVATION.searchPopup }}>
       <form
         onSubmit={(e) => {

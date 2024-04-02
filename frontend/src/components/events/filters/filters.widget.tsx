@@ -35,7 +35,7 @@ export const EventFilters: FCVM<EventFiltersViewModel> = observer(({ vm }) => {
   if (!vm.showFilters) return;
 
   return (
-    <div ref={ref} className="flex p-6 bg-button-accent w-full gap-6 rounded-2xl">
+    <div ref={ref} className="flex flex-wrap p-6 bg-button-accent w-full gap-6 rounded-2xl">
       <FilterGroup vm={vm.timeOfYear} />
       <FilterGroup vm={vm.timeOfDay} />
       <FilterGroup vm={vm.screenOrientation} />

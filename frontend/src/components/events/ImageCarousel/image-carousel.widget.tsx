@@ -12,6 +12,7 @@ import DownloadIcon from "@/assets/icons/download.svg";
 
 export const ImageCarousel: FCVM<EventsViewModel> = observer(({ vm }) => {
   const [expanded, setExpanded] = useState(false);
+  const [licenseAccepted, setLicenseAccepted] = useState(false);
   const image = vm.expandedImage;
 
   useEffect(() => {
@@ -45,18 +46,18 @@ export const ImageCarousel: FCVM<EventsViewModel> = observer(({ vm }) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95">
             <Dialog.Panel
-              className="relative flex flex-col w-full h-full transition-all bg-bg"
+              className="relative flex flex-col w-full overflow-auto h-full transition-all bg-bg"
               onSubmit={(e) => e.preventDefault()}>
               <button
                 className="absolute top-0 right-0 p-3 transition-colors text-white/30 hover:text-white/70"
                 onClick={onClose}>
                 <CrossIcon className="size-6" />
               </button>
-              <div className="flex-1 overflow-hidden">
-                <img src={image?.imgSrc} className="h-full mx-auto object-contain" />
+              <div className="flex-1 flex sm:overflow-hidden">
+                <img src={image?.imgSrc} className="w-full sm:h-full m-auto object-contain" />
               </div>
               <div className="bg-natural2">
-                <div className="section py-4 w-full grid grid-cols-2 gap-8">
+                <div className="section py-4 w-full flex flex-col md:grid grid-cols-2 gap-8">
                   <div className="flex flex-col w-full gap-2">
                     <div className="flex items-center gap-2">
                       <h2>{image?.title}</h2>
@@ -74,12 +75,15 @@ export const ImageCarousel: FCVM<EventsViewModel> = observer(({ vm }) => {
                       ))}
                     </ul>
                   </div>
-                  <div className="flex w-full gap-4 items-center">
+                  <div className="flex flex-col sm:flex-row w-full gap-4 items-center">
                     <div className="flex flex-col gap-1 text-xs text-wrap text-left">
                       Обратите внимание на ограничения использования, установленные Лицензионным
                       соглашением.
                       <CheckmarkWithLabel
-                        checked
+                        checked={licenseAccepted}
+                        onClick={() => {
+                          setLicenseAccepted(!licenseAccepted);
+                        }}
                         label={
                           <p>
                             Соглашаюсь с условиями{" "}
@@ -89,7 +93,9 @@ export const ImageCarousel: FCVM<EventsViewModel> = observer(({ vm }) => {
                       />
                     </div>
                     <span className="h-full w-px bg-white/15" />
-                    <Button variant="accent" className="w-fit text-text text-nowrap items-center">
+                    <Button
+                      variant="accent"
+                      className="w-full sm:w-fit text-text text-nowrap items-center">
                       {image && convertFileSize(image.fileSize)}
                       <DownloadIcon className="size-6" />
                     </Button>

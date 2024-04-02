@@ -3,6 +3,7 @@ import { ReactNode } from "@tanstack/react-router";
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "accent" | "outline";
+  disabled?: boolean;
 }
 
 export const Button = (x: Props) => {
@@ -10,8 +11,9 @@ export const Button = (x: Props) => {
     <button
       {...x}
       className={cn(
-        "flex items-center cursor-pointer px-4 py-3 gap-2 h-fit rounded-xl",
-        (!x.variant || x.variant === "default") && "bg-primary",
+        "flex items-center cursor-pointer px-4 py-3 gap-2 h-fit rounded-xl justify-center",
+        (!x.variant || x.variant === "default") &&
+          "bg-primary disabled:bg-[#E5E5E5] disabled:text-[#BDBDBD]",
         x.variant === "accent" && "bg-button-accent",
         x.variant === "outline" && "border border-button-outline",
         x.className

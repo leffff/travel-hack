@@ -23,7 +23,8 @@
     "react-day-picker": "^8.10.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "vaul": "^0.9.0"
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.16.5",

@@ -16,11 +16,12 @@ export const ImageRow: FC<Props> = observer((x) => {
     <div
       onClick={() => x.vm.openImage(x.images[0])}
       className={cn(
-        "grid gap-1 grid-rows-[1fr,1fr]",
+        "md:grid gap-1 md:grid-rows-[1fr,1fr]",
         x.layout === 1 && "grid-cols-[1fr,1fr,1fr,1fr]",
         x.layout === 2 && "grid-cols-[1fr,1fr]",
         x.layout === 3 && "grid-cols-[1fr,1.5fr,1fr]",
-        x.layout === 4 && "grid-cols-[0.75fr,0.75fr,1fr]"
+        x.layout === 4 && "grid-cols-[0.75fr,0.75fr,1fr]",
+        "flex flex-col"
       )}>
       {x.images.map((image) => {
         const isSelected = x.vm.selectedImages.has(image);
