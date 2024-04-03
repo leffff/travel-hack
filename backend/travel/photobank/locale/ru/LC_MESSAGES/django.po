@@ -49,7 +49,7 @@ msgstr "%(model_name)s '%(object)s' восстановлено."
 #: admin/recover_view.py:25
 #, python-format
 msgid "Are you sure you want to recover this %(model_name)s?"
-msgstr "Вы уверены, что хотите восстановить  %(model_name)s"
+msgstr "Вы уверены, что хотите восстановить  %(model_name)s?"
 
 #: models.py:9
 #, fuzzy
