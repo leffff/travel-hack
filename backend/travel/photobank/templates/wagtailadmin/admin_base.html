@@ -4,3 +4,11 @@
 {% block branding_favicon %}
     <link rel="shortcut icon" href="{% static 'russpass_logo.svg' %}" />
 {% endblock %}
+
+{% block extra_css %}
+    <style>
+        .w-summary {
+            color: var(--w-color-grey-600);
+        }
+    </style>
+{% endblock %}
