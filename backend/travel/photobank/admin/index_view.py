@@ -12,8 +12,8 @@ class PhotoAdminIndexView(BasePhotoAdminIndexView):
     page_title = _('Actual photobank')
 
 
-class DeletedPhotoAdminIndexView(BasePhotoAdminIndexView):
-    page_title = _('Deleted photos')
+class HiddenPhotoAdminIndexView(BasePhotoAdminIndexView):
+    page_title = _('Hidden photos')
 
 
 class BaseButtonHelper(ButtonHelper):
@@ -26,8 +26,18 @@ class IndexViewButtonHelper(BaseButtonHelper):
         default['url'] = self.url_helper.get_action_url('create_new')
         return default
 
+    def delete_button(self, pk, classnames_add=None, classnames_exclude=None):
+        # Переопределяем delete-action на hide
+        default = super().delete_button(pk, classnames_add, classnames_exclude)
+        default.update({
+            "url": self.url_helper.get_action_url("hide", quote(pk)),
+            "label": _("Hide"),
+            "title": _("Hide %(object)s") % {"object": self.verbose_name},
+        })
+        return default
 
-class DeletedViewButtonHelper(BaseButtonHelper):
+
+class HiddenViewButtonHelper(BaseButtonHelper):
     delete_button_classnames = ["warning"]
 
     def add_button(self, classnames_add=None, classnames_exclude=None):
@@ -37,6 +47,7 @@ class DeletedViewButtonHelper(BaseButtonHelper):
         return None
 
     def delete_button(self, pk, classnames_add=None, classnames_exclude=None):
+        # Переопределяем delete-action на recover
         default = super().delete_button(pk, classnames_add, classnames_exclude)
         default.update({
             "url": self.url_helper.get_action_url("recover", quote(pk)),

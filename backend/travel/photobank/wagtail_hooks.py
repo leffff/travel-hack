@@ -1,6 +1,7 @@
 from functools import cached_property
 
 from django.forms.utils import flatatt
+from django.templatetags.static import static
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
@@ -11,13 +12,13 @@ from wagtail_modeladmin.mixins import ThumbnailMixin
 from wagtail_modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 
 from photobank.admin.index_view import (
-    DeletedViewButtonHelper, IndexViewButtonHelper, PhotoAdminIndexView,
-    DeletedPhotoAdminIndexView,
+    HiddenViewButtonHelper, IndexViewButtonHelper, PhotoAdminIndexView,
+    HiddenPhotoAdminIndexView,
 )
 from photobank.models import Photo
 from photobank.utils import human_size
 
-ENABLED_MENU_ITEMS = ('images', 'photos')
+ENABLED_MENU_ITEMS = ('photos',)
 
 
 class ReadOnlyPanel(FieldPanel):
@@ -77,7 +78,7 @@ class BasePhotoAdmin(ThumbnailMixin, ModelAdmin):
                 FieldPanel('title'),
                 FieldPanel('tags'),
                 ReadOnlyPanel('created_at'),
-                ReadOnlyPanel('deleted'),
+                ReadOnlyPanel('hidden'),
             ),
             classname='col6',
         ),
@@ -103,23 +104,23 @@ class PhotoAdmin(BasePhotoAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        return qs.filter(deleted=False)
+        return qs.filter(hidden=False)
 
 
-class DeletedPhotoAdmin(BasePhotoAdmin):
-    menu_label = _('Deleted photos')
-    menu_item_name = 'deleted_photos'
-    index_view_class = DeletedPhotoAdminIndexView
-    base_url_path = 'photobank/deleted'
-    button_helper_class = DeletedViewButtonHelper
+class HiddenPhotoAdmin(BasePhotoAdmin):
+    menu_label = _('Hidden photos')
+    menu_item_name = 'hidden_photos'
+    index_view_class = HiddenPhotoAdminIndexView
+    base_url_path = 'photobank/hidden'
+    button_helper_class = HiddenViewButtonHelper
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        return qs.filter(deleted=True)
+        return qs.filter(hidden=True)
 
 
 class PhotoGroupAdmin(ModelAdminGroup):
-    items = (PhotoAdmin, DeletedPhotoAdmin)
+    items = (PhotoAdmin, HiddenPhotoAdmin)
     menu_label = _('Photobank')
     menu_item_name = 'photos'
 
@@ -130,3 +131,7 @@ modeladmin_register(PhotoGroupAdmin)
 @hooks.register('construct_main_menu')
 def hide_menu_items(request, menu_items):
     menu_items[:] = [item for item in menu_items if item.name in ENABLED_MENU_ITEMS]
+
+@hooks.register('insert_global_admin_css')
+def global_admin_css():
+    return format_html('<link rel="stylesheet" href="{}">', static('photobank_wagtail_theme.css'))

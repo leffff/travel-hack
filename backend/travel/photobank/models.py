@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils.translation import gettext as _
 
@@ -15,17 +17,28 @@ class Photo(AbstractImage):
         READY = 'RED'
 
     status = models.CharField(max_length=3, choices=PhotoStatus, default=PhotoStatus.NEW)
-    deleted = models.BooleanField(default=False)
+    hidden = models.BooleanField(default=False)
 
-    def delete(self, *args, **kwargs):
-        self.deleted = True
+    admin_form_fields = ('title', 'file')
+
+    def hide(self) -> None:
+        self.hidden = True
         # TODO: delete in clickhouse
-        self.save(update_fields=('deleted', ))
+        self.save(update_fields=('hidden', ))
 
-    def recover(self):
-        self.deleted = False
+    def recover(self) -> None:
+        self.hidden = False
         # TODO: recover in clickhouse
-        self.save(update_fields=('deleted', ))
+        self.save(update_fields=('hidden', ))
+
+    def get_upload_to(self, filename: str) -> str:
+        parts = filename.rsplit('.', 1) or ['']
+        ext = parts[-1]
+        return super().get_upload_to(uuid.uuid4().hex + '.' + ext)
+
+    def delete(self, *args, **kwargs) -> None:
+        # TODO: delete in clickhouse
+        super().delete()
 
 
 class PhotoRendition(AbstractRendition):

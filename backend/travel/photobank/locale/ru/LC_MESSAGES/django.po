@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 21:22+0300\n"
+"POT-Creation-Date: 2024-04-03 23:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,19 +20,47 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: admin/hide_view.py:11
+#, fuzzy
+#| msgid "Hidden photos"
+msgid "Hide Photo"
+msgstr "Скрытые фото"
+
+#: admin/hide_view.py:15
+#, fuzzy, python-format
+#| msgid "%(model_name)s '%(object)s' recovered."
+msgid "%(model_name)s '%(object)s' was hidden."
+msgstr "%(model_name)s '%(object)s' скрыто."
+
+#: admin/hide_view.py:25
+#, fuzzy, python-format
+#| msgid "Are you sure you want to recover this %(model_name)s?"
+msgid "Are you sure you want to hide this %(model_name)s?"
+msgstr "Вы уверены, что хотите скрыть  %(model_name)s?"
+
 #: admin/index_view.py:12 wagtail_hooks.py:98
 msgid "Actual photobank"
 msgstr "Банк актуальных фотографий"
 
 #: admin/index_view.py:16 wagtail_hooks.py:110
-msgid "Deleted photos"
-msgstr "Удаленные фотографии"
+msgid "Hidden photos"
+msgstr "Скрытые фото"
 
-#: admin/index_view.py:43
+#: admin/index_view.py:34
+msgid "Hide"
+msgstr "Скрыть"
+
+#: admin/index_view.py:35
+#, fuzzy, python-format
+#| msgid "Recover %(object)s"
+msgid "Hide %(object)s"
+msgstr "Скрыть %(object)s"
+
+#: admin/index_view.py:54
 msgid "Recover"
 msgstr "Восстановить"
 
-#: admin/index_view.py:44
+#: admin/index_view.py:55
 #, python-format
 msgid "Recover %(object)s"
 msgstr "Восстановить %(object)s"
@@ -51,17 +79,53 @@ msgstr "%(model_name)s '%(object)s' восстановлено."
 msgid "Are you sure you want to recover this %(model_name)s?"
 msgstr "Вы уверены, что хотите восстановить  %(model_name)s?"
 
-#: models.py:9
+#: models.py:11
 #, fuzzy
 #| msgid "Photobank"
 msgid "Photo"
 msgstr "Фото"
 
-#: models.py:10
+#: models.py:12
 #, fuzzy
 #| msgid "Photobank"
 msgid "Photos"
 msgstr "Фото"
+
+#: templates/hide_photo_view.html:15 templates/recover_photo_view.html:15
+#, fuzzy, python-format
+#| msgid "%(model_name)s '%(object)s' recovered."
+msgid "%(model_name)s could not be deleted"
+msgstr "%(model_name)s '%(object)s' восстановлено."
+
+#: templates/hide_photo_view.html:16 templates/recover_photo_view.html:16
+#, python-format
+msgid ""
+"'%(instance_name)s' is currently referenced by other objects, and cannot be "
+"deleted without jeopardising data integrity. To delete it successfully, "
+"first remove references from the following objects, then try again:"
+msgstr ""
+
+#: templates/hide_photo_view.html:20 templates/recover_photo_view.html:20
+msgid "Go back to listing"
+msgstr "Обратно к списку"
+
+#: templates/hide_photo_view.html:25
+msgid "Yes, hide"
+msgstr "Скрыть"
+
+#: templates/hide_photo_view.html:26
+msgid "No, don't hide"
+msgstr "Нет, не скрывать"
+
+#: templates/recover_photo_view.html:25
+#, fuzzy
+#| msgid "Recover"
+msgid "Yes, recover"
+msgstr "Восстановить"
+
+#: templates/recover_photo_view.html:26
+msgid "No, don't recover"
+msgstr "Нет, не восстанавливать"
 
 #: utils.py:4
 msgid "bytes"
@@ -98,3 +162,6 @@ msgstr "Теги"
 #: wagtail_hooks.py:123
 msgid "Photobank"
 msgstr "Фотобанк"
+
+#~ msgid "Deleted photos"
+#~ msgstr "Удаленные фотографии"
