@@ -13,14 +13,9 @@ class Photo(AbstractImage):
         NEW = 'NEW'
         IN_PROGRESS = 'INP'
         READY = 'RED'
-        DELETED = 'DEL'
 
     status = models.CharField(max_length=3, choices=PhotoStatus, default=PhotoStatus.NEW)
     deleted = models.BooleanField(default=False)
-
-    # admin_form_fields = tuple(filter(lambda item: item not in ('tags', ),
-    #                                  Image.admin_form_fields))
-    admin_form_fields = Image.admin_form_fields
 
     def delete(self, *args, **kwargs):
         self.deleted = True
@@ -29,7 +24,7 @@ class Photo(AbstractImage):
 
     def recover(self):
         self.deleted = False
-        # TODO: delete in clickhouse
+        # TODO: recover in clickhouse
         self.save(update_fields=('deleted', ))
 
 
