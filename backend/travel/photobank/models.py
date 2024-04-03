@@ -1,9 +1,14 @@
 from django.db import models
+from django.utils.translation import gettext as _
 
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
 
 
 class Photo(AbstractImage):
+    class Meta:
+        verbose_name = _('Photo')
+        verbose_name_plural = _('Photos')
+
     class PhotoStatus(models.TextChoices):
         NEW = 'NEW'
         IN_PROGRESS = 'INP'

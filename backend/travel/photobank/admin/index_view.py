@@ -13,7 +13,7 @@ class PhotoAdminIndexView(BasePhotoAdminIndexView):
 
 
 class DeletedPhotoAdminIndexView(BasePhotoAdminIndexView):
-    page_title = _('Удаленные фотографии')
+    page_title = _('Deleted photos')
 
 
 class BaseButtonHelper(ButtonHelper):
