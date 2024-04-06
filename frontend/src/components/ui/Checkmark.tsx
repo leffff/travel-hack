@@ -9,6 +9,7 @@ interface Props {
   size?: number;
   onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   variant?: "default" | "accent";
+  className?: string;
 }
 
 export const Checkmark = observer((x: Props) => {
@@ -19,9 +20,10 @@ export const Checkmark = observer((x: Props) => {
       }}
       style={{ width: x.size, height: x.size }}
       className={cn(
-        "w-5 h-5 min-w-5 p-1 flex items-center justify-center rounded",
+        "size-5 min-h-5 max-h-5 min-w-5 max-w-5 p-1 flex items-center justify-center rounded",
         x.checked && "bg-primary",
-        !x.checked && "bg-white border border-checkbox-border"
+        !x.checked && "bg-white border border-checkbox-border",
+        x.className
       )}>
       {x.checked && <CheckIcon className={x.variant === "accent" ? "text-text" : "text-white"} />}
     </button>

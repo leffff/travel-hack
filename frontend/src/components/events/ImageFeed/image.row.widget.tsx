@@ -62,7 +62,7 @@ export const ImageRow: FC<Props> = observer((x) => {
             </div>
             <div
               className={cn(
-                "absolute top-3 left-3 transition-opacity opacity-0 group-hover:opacity-100",
+                "absolute top-3 left-3 transition-opacity sm:opacity-0 group-hover:opacity-100",
                 isSelected && "opacity-100"
               )}>
               <Checkmark
@@ -70,6 +70,10 @@ export const ImageRow: FC<Props> = observer((x) => {
                   e.stopPropagation();
                   x.vm.toggleImage(image);
                 }}
+                className={cn(
+                  "size-7 min-h-7 max-h-7 min-w-7 max-w-7",
+                  "sm:size-5 sm:min-h-5 sm:max-h-5 sm:min-w-5 sm:max-w-5"
+                )}
                 checked={isSelected}
               />
             </div>

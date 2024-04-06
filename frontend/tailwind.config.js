@@ -16,7 +16,7 @@ module.exports = {
         sm: "576px",
         md: "768px",
         lg: "992px",
-        "2xl": "1400px"
+        etalon: "2020px"
       }
     },
     extend: {
@@ -43,8 +43,10 @@ module.exports = {
         grotesk: ["'Proto Grotesk'", "SuisseIntl", "sans-serif"]
       },
       boxShadow: {
-        dropdown: "0px 4px 30px 0px rgba(148, 148, 148, 0.25)"
+        dropdown: "0px 4px 30px 0px rgba(148, 148, 148, 0.25)",
+        travelGpt: "4px 4px 52px 0px #00000026"
       }
     }
-  }
+  },
+  plugins: [require("@tailwindcss/typography")]
 };

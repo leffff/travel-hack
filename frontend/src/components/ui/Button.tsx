@@ -14,7 +14,7 @@ export const Button = (x: Props) => {
         "flex items-center cursor-pointer px-4 py-3 gap-2 h-fit rounded-xl justify-center",
         (!x.variant || x.variant === "default") &&
           "bg-primary disabled:bg-[#E5E5E5] disabled:text-[#BDBDBD]",
-        x.variant === "accent" && "bg-button-accent",
+        x.variant === "accent" && "bg-button-accent disabled:bg-[#E5E5E5] disabled:text-[#BDBDBD]",
         x.variant === "outline" && "border border-button-outline",
         x.className
       )}>
