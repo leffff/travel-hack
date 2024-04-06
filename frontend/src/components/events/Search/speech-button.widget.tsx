@@ -12,7 +12,7 @@ export const SpeechButton: FCVM<SearchViewModel> = observer(({ vm }) => {
 
   useEffect(() => {
     if (transcript.length > 0) {
-      vm.updateSearch(transcript);
+      vm.updateSearch(transcript, true);
       resetTranscript();
     }
   }, [transcript, resetTranscript, vm]);
@@ -27,7 +27,7 @@ export const SpeechButton: FCVM<SearchViewModel> = observer(({ vm }) => {
           SpeechRecognition.stopListening();
           return;
         }
-        SpeechRecognition.startListening({ continuous: true });
+        SpeechRecognition.startListening({ language: "ru-RU" });
       }}>
       <MicrophoneIcon className={cn("size-6", listening ? "text-red-500" : "text-bg")} />
     </button>
