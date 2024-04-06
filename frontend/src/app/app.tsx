@@ -4,6 +4,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import "@/assets/fonts/fonts.css";
 import "./globals.css";
 import { configure } from "mobx";
+import "regenerator-runtime/runtime";
 
 configure({
   enforceActions: "never"

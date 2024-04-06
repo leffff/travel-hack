@@ -1,7 +1,7 @@
 import { FCVM } from "@/utils/vm";
 import { observer } from "mobx-react-lite";
 import { TravelGptViewModel } from "./travel-gpt.vm";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "../ui/Button";
 import { ELEVATION } from "@/lib/constants/elevation";
@@ -12,7 +12,14 @@ import { Spinner } from "../ui/Spinner";
 import { TravelGptModal } from "./travel-gpt.modal";
 
 export const TravelGpt: FCVM<TravelGptViewModel> = observer(({ vm }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [hidden, setHidden] = useState(true);
+
+  useEffect(() => {
+    if (!vm.loading) {
+      inputRef?.current?.focus();
+    }
+  }, [vm.loading]);
 
   return (
     <>
@@ -26,7 +33,7 @@ export const TravelGpt: FCVM<TravelGptViewModel> = observer(({ vm }) => {
         style={{ zIndex: ELEVATION.travelGpt }}>
         <div className={cn("relative flex flex-col", hidden ? "h-14 w-fit" : "h-[500px] w-96")}>
           {!hidden ? (
-            <div className="appear flex flex-col w-full h-full p-4 bg-white rounded-2xl">
+            <div className="appear flex flex-col w-full h-full p-4 bg-white rounded-2xl border border-button-outline shadow-travelGpt">
               <div className="flex justify-between items-center">
                 <h1 className="text-xl">Чем я могу помочь?</h1>
                 <CrossIcon className="size-6 cursor-pointer" onClick={() => setHidden(!hidden)} />
@@ -79,7 +86,13 @@ export const TravelGpt: FCVM<TravelGptViewModel> = observer(({ vm }) => {
                 }}>
                 <input
                   autoFocus
+                  ref={inputRef}
                   disabled={vm.loading}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") {
+                      setHidden(true);
+                    }
+                  }}
                   onChange={(e) => (vm.text = e.target.value)}
                   value={vm.text}
                   className="flex-1 py-3 px-4 border rounded-xl pr-12 outline-primary"

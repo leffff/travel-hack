@@ -9,6 +9,7 @@ import { Button } from "../../ui/Button";
 import { SearchPopup } from "./serach-popup.widget";
 import { ELEVATION } from "@/lib/constants/elevation";
 import { ImageSearch } from "./image-search.widget";
+import { SpeechButton } from "./speech-button.widget";
 
 export const Tag = (x: { tag: string; onDelete: () => void }) => {
   return (
@@ -73,6 +74,7 @@ export const SearchWidget: FCVM<SearchViewModel> = observer(({ vm }) => {
               <CrossIcon className="size-6 text-bg" />
             </button>
           )}
+          <SpeechButton vm={vm} />
           <ImageSearch vm={vm} />
         </div>
         <SearchPopup vm={vm.popupVm} />

@@ -18,18 +18,12 @@ import { Route as NavEventsImport } from './routes/_nav/_events'
 
 // Create Virtual Routes
 
-const LoginLazyImport = createFileRoute('/login')()
 const NavIndexLazyImport = createFileRoute('/_nav/')()
 const NavEventsEventsIndexLazyImport = createFileRoute(
   '/_nav/_events/events/',
 )()
 
 // Create/Update Routes
-
-const LoginLazyRoute = LoginLazyImport.update({
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
 
 const NavRoute = NavImport.update({
   id: '/_nav',
@@ -61,10 +55,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NavImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      preLoaderRoute: typeof LoginLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/_nav/_events': {
       preLoaderRoute: typeof NavEventsImport
       parentRoute: typeof NavImport
@@ -87,7 +77,6 @@ export const routeTree = rootRoute.addChildren([
     NavEventsRoute.addChildren([NavEventsEventsIndexLazyRoute]),
     NavIndexLazyRoute,
   ]),
-  LoginLazyRoute,
 ])
 
 /* prettier-ignore-end */
