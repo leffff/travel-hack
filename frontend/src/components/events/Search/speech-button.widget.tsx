@@ -22,7 +22,7 @@ export const SpeechButton: FCVM<SearchViewModel> = observer(({ vm }) => {
     () =>
       debounce(() => {
         SpeechRecognition.stopListening();
-      }, 10000),
+      }, 4000),
     []
   );
 
