@@ -1,4 +1,4 @@
-export const downloadImage = (imageUrl: string, filename: string | null) => {
+export const downloadImage = (imageUrl: string, filename?: string | null) => {
   fetch(imageUrl)
     .then((response) => response.blob())
     .then((blob) => {
