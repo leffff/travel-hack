@@ -1,0 +1,15 @@
+server {
+    listen 8888;
+
+    location /llm_browser/ {
+        proxy_pass http://localhost:50806;
+    }
+
+    location /superres/ {
+        proxy_pass http://localhost:50807;
+    }
+
+    location /retriever/ {
+        proxy_pass http://localhost:50808;
+    }
+}

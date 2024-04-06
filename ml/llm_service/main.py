@@ -7,7 +7,7 @@ from llm_browser import LLMBrowser
 import sys
 sys.path.append("../")
 from translation_service.translation import Translator
-
+from retriever_service.retriever_api import RetrieverAPI
 
 class LLMBrowserRequestParams(BaseModel):
     request: str
@@ -37,7 +37,7 @@ translator = Translator(link)
 llmbrowser = LLMBrowser(model, tokenizer, translator, max_new_tokens=200)
 
 
-@app.post("/llmbrowser_run")
-def llmbroswer_run(params: LLMBrowserRequestParams):
+@app.post("/llm_browser/")
+def llm_browser(params: LLMBrowserRequestParams):
     result = llmbrowser(params.request)
     return {"result": result}
