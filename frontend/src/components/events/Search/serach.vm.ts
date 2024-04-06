@@ -27,8 +27,12 @@ export class SearchViewModel {
   isLoading = false;
   popupVm = new SearchPopupViewModel(this);
   search = "";
-  updateSearch(search: string) {
-    this.search = search;
+  updateSearch(search: string, append?: boolean) {
+    if (append) {
+      this.search += search;
+    } else {
+      this.search = search;
+    }
     this.popupVm.visible = search.length > 0;
     this.popupVm.searchedTags = new Set(mockTags.filter((tag) => tag.includes(this.search)));
     this.isLoading = true;
