@@ -16,11 +16,12 @@ export const ImageRow: FC<Props> = observer((x) => {
     <div
       onClick={() => x.vm.openImage(x.images[0])}
       className={cn(
-        "grid gap-1 grid-rows-[1fr,1fr]",
+        "md:grid gap-1 md:grid-rows-[1fr,1fr]",
         x.layout === 1 && "grid-cols-[1fr,1fr,1fr,1fr]",
         x.layout === 2 && "grid-cols-[1fr,1fr]",
         x.layout === 3 && "grid-cols-[1fr,1.5fr,1fr]",
-        x.layout === 4 && "grid-cols-[0.75fr,0.75fr,1fr]"
+        x.layout === 4 && "grid-cols-[0.75fr,0.75fr,1fr]",
+        "flex flex-col"
       )}>
       {x.images.map((image) => {
         const isSelected = x.vm.selectedImages.has(image);
@@ -61,7 +62,7 @@ export const ImageRow: FC<Props> = observer((x) => {
             </div>
             <div
               className={cn(
-                "absolute top-3 left-3 transition-opacity opacity-0 group-hover:opacity-100",
+                "absolute top-3 left-3 transition-opacity sm:opacity-0 group-hover:opacity-100",
                 isSelected && "opacity-100"
               )}>
               <Checkmark
@@ -69,6 +70,10 @@ export const ImageRow: FC<Props> = observer((x) => {
                   e.stopPropagation();
                   x.vm.toggleImage(image);
                 }}
+                className={cn(
+                  "size-7 min-h-7 max-h-7 min-w-7 max-w-7",
+                  "sm:size-5 sm:min-h-5 sm:max-h-5 sm:min-w-5 sm:max-w-5"
+                )}
                 checked={isSelected}
               />
             </div>

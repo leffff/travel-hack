@@ -8,10 +8,11 @@ import { useRef } from "react";
 import { Button } from "../../ui/Button";
 import { SearchPopup } from "./serach-popup.widget";
 import { ELEVATION } from "@/lib/constants/elevation";
+import { ImageSearch } from "./image-search.widget";
 
 export const Tag = (x: { tag: string; onDelete: () => void }) => {
   return (
-    <li className="bg-bg px-2 py-1 text-white rounded-md flex gap-2 items-center text-xs">
+    <li className="bg-bg px-2 py-1 text-white rounded-md flex gap-2 items-center text-xs h-fit">
       #{x.tag}
       <button
         onClick={(e) => {
@@ -28,9 +29,11 @@ export const Tag = (x: { tag: string; onDelete: () => void }) => {
 export const SearchWidget: FCVM<SearchViewModel> = observer(({ vm }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const sortedTags = [...vm.selectedTags].sort();
+
   return (
     <div
-      className="sticky top-0 w-full flex gap-2 bg-bg-content pt-6 pb-4"
+      className="sticky top-0 w-full flex flex-col md:flex-row gap-2 bg-bg-content pt-6 pb-4"
       style={{ zIndex: ELEVATION.searchPopup }}>
       <form
         onSubmit={(e) => {
@@ -40,30 +43,38 @@ export const SearchWidget: FCVM<SearchViewModel> = observer(({ vm }) => {
         onClick={() => inputRef.current?.focus()}
         className="relative flex-1 border focus-within:border-primary bg-white flex py-3 px-4 rounded-xl cursor-text">
         <ul className="gap-1 flex flex-wrap w-full">
-          {[...vm.selectedTags].sort().map((tag) => (
+          {sortedTags.map((tag) => (
             <Tag key={tag} tag={tag} onDelete={() => vm.removeTag(tag)} />
           ))}
           {vm.selectedTags.size === 0 && <SearchIcon className="text-text-secondary" />}
           <input
             ref={inputRef}
-            className="pl-1 bg-transparent outline-none flex-1"
+            className="pl-1 bg-transparent outline-none flex-1 h-fit"
             type="text"
             placeholder={vm.selectedTags.size ? "" : "Введите запрос, название или #тег"}
             value={vm.search}
             onChange={(e) => vm.updateSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Backspace" && vm.search.length === 0) {
+                vm.removeTag(sortedTags.pop()!);
+              }
+            }}
           />
         </ul>
-        {(vm.selectedTags.size > 0 || vm.search.length > 0) && (
-          <button
-            onClick={() => {
-              vm.clearFilters();
-              inputRef.current?.focus();
-            }}
-            type="button"
-            className="h-fit">
-            <CrossIcon className="size-6 text-bg" />
-          </button>
-        )}
+        <div className="flex gap-2">
+          {(vm.selectedTags.size > 0 || vm.search.length > 0) && (
+            <button
+              onClick={() => {
+                vm.clearFilters();
+                inputRef.current?.focus();
+              }}
+              type="button"
+              className="h-fit">
+              <CrossIcon className="size-6 text-bg" />
+            </button>
+          )}
+          <ImageSearch vm={vm} />
+        </div>
         <SearchPopup vm={vm.popupVm} />
       </form>
       <Button

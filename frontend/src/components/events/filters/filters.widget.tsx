@@ -26,16 +26,10 @@ const FilterGroup = observer(<T extends string>({ vm }: { vm: FilterGroupViewMod
 });
 
 export const EventFilters: FCVM<EventFiltersViewModel> = observer(({ vm }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // scroll above filters
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  }, [vm.showFilters]);
   if (!vm.showFilters) return;
 
   return (
-    <div ref={ref} className="flex p-6 bg-button-accent w-full gap-6 rounded-2xl">
+    <div className="flex justify-between flex-col sm:flex-row p-6 bg-button-accent w-full gap-6 rounded-2xl">
       <FilterGroup vm={vm.timeOfYear} />
       <FilterGroup vm={vm.timeOfDay} />
       <FilterGroup vm={vm.screenOrientation} />

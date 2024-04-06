@@ -2,22 +2,33 @@ import { Dialog, Transition } from "@headlessui/react";
 import { FC, Fragment, ReactNode } from "react";
 import CrossIcon from "@/assets/icons/cross.svg";
 import { ELEVATION } from "@/lib/constants/elevation";
+import { cn } from "@/lib/utils/cn";
 
 interface DialogBaseProps {
   isOpen: boolean;
   onCancel?: () => void;
   children?: ReactNode;
   width?: string | number;
+  className?: string;
 }
 
-export const DialogBase: FC<DialogBaseProps> = ({ isOpen, onCancel, children, width }) => {
+export const DialogBase: FC<DialogBaseProps> = ({
+  isOpen,
+  onCancel,
+  children,
+  width,
+  className
+}) => {
   function closeModal() {
     onCancel?.();
   }
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog className="relative z-100" onClose={closeModal} onSubmit={(e) => e.preventDefault()}>
+      <Dialog
+        className={"relative z-100"}
+        onClose={closeModal}
+        onSubmit={(e) => e.preventDefault()}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -44,12 +55,15 @@ export const DialogBase: FC<DialogBaseProps> = ({ isOpen, onCancel, children, wi
               leaveTo="opacity-0 scale-95">
               <Dialog.Panel
                 onSubmit={(e) => e.preventDefault()}
-                className="w-fit transform bg-white transition-all rounded-2xl py-6 px-14 relative"
+                className={cn(
+                  "w-fit transform bg-white transition-all rounded-2xl py-6 px-10 sm:px-14 relative",
+                  className
+                )}
                 style={{ width }}>
                 <div className="flex flex-col">{children}</div>
                 {onCancel && (
                   <button
-                    className="absolute top-2 right-2 size-12 flex items-center justify-center"
+                    className="absolute top-0 right-0 sm:top-2 sm:right-2 size-12 flex items-center justify-center"
                     onClick={onCancel}>
                     <div className="rounded-full bg-button-accent size-6 flex items-center justify-center">
                       <CrossIcon className="text-text-secondary size-4" />

@@ -1,5 +1,7 @@
 export const ELEVATION = {
   searchPopup: 10,
-  dialogBackdrop: 11,
-  dialog: 12
+  dialogBackdrop: 14,
+  dialog: 15,
+  carousel: 13,
+  travelGpt: 12
 };

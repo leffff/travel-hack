@@ -76,4 +76,19 @@ export class SearchViewModel {
 
     this.isLoading = false;
   };
+
+  getSearch() {
+    return {
+      tags: [...this._tags],
+      search: this.search
+    };
+  }
+
+  imageSearchLoading = false;
+  async onImageUpload(file: File) {
+    this.imageSearchLoading = true;
+    console.log("uploading image...", file);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    this.imageSearchLoading = false;
+  }
 }
