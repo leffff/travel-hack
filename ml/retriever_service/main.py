@@ -86,6 +86,7 @@ class QueryParams(BaseModel):
     text: str | None
     tags: list | None
     filters: dict | None
+    k: int | None
 
 
 @app.post("/retriever/query")
@@ -94,7 +95,8 @@ def retriever_query(params: QueryParams):
         img_url=params.img_url,
         text=params.text,
         tags=params.tags,
-        filters=params.filters
+        filters=params.filters,
+        k=params.k
     )
     return response
 

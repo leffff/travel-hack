@@ -92,7 +92,7 @@ class ClickHouse:
                 WHERE {" AND ".join([f"{key} = '{filters[key]}'" for key in filters])} AND hidden = false
             ) AS subquery
             ORDER BY {order_by} ASC
-            LIMIT 100
+            LIMIT {k}
             FORMAT Vertical
             """
 
@@ -105,7 +105,7 @@ class ClickHouse:
                 FROM {table}
                 WHERE hidden = false
                 ORDER BY {order_by} ASC
-                LIMIT 100
+                LIMIT {k}
                 FORMAT Vertical
             """
 
@@ -445,7 +445,7 @@ class Retriever:
     def recover_sample(self, id):
         self.clickhouse.recover_sample(id)
 
-    def query(self, img_url: str = None, text: str = None, tags: list = None, filters: dict = None, k: int = 1):
+    def query(self, img_url: str = None, text: str = None, tags: list = None, filters: dict = None, k: int = 5):
         """
         filters = {
             "orientation_filter": orientation_filter,

@@ -1,16 +1,19 @@
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+import sys
+
 from fastapi import FastAPI
 from pydantic import BaseModel
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
 from llm_browser import LLMBrowser
-import sys
+
 sys.path.append("../")
 from translation_service.translation import Translator
 from retriever_service.retriever_api import RetrieverAPI
 
+
 class LLMBrowserRequestParams(BaseModel):
     request: str
+    max_new_tokens: int
 
 
 app = FastAPI()
@@ -34,10 +37,12 @@ tokenizer = AutoTokenizer.from_pretrained(model_name, add_bos_token=True, trust_
 link = "https://01b3-109-252-98-213.ngrok-free.app"
 translator = Translator(link)
 
-llmbrowser = LLMBrowser(model, tokenizer, translator, max_new_tokens=200)
+retriever = RetrieverAPI()
+
+llmbrowser = LLMBrowser(model, tokenizer, retriever, translator)
 
 
 @app.post("/llm_browser/")
 def llm_browser(params: LLMBrowserRequestParams):
-    result = llmbrowser(params.request)
+    result = llmbrowser(params.request, params.max_new_tokens)
     return {"result": result}
