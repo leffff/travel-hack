@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit disk_free_limit 2147483648
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+      - ./rabbitmq-conf:/etc/rabbitmq/conf.d
+    ports:
+      - "15672:15672"
+      - "5672:5672"

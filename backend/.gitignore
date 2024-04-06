@@ -164,3 +164,4 @@ media/
 
 **/.DS_Store
 
+**/*.db

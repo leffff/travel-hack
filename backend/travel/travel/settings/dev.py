@@ -16,6 +16,7 @@ DATABASES = {
 
 STORAGES['default']['OPTIONS'] = YAML_CONFIG['STORAGES']['S3']['dev']
 
+CELERY_BROKER_URL = YAML_CONFIG['celery']['dev']['CELERY_BROKER_URL']
 
 try:
     from .local import *

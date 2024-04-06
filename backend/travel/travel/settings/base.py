@@ -192,3 +192,5 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 # PhotoBank
 WAGTAILIMAGES_IMAGE_MODEL = 'photobank.Photo'
+
+CELERY_TASK_TIME_LIMIT = 30 * 60
