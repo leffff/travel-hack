@@ -4,6 +4,8 @@ from django.db import models
 from django.utils.translation import gettext as _
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
 
+from photobank.utils import RETRIEVER_CLIENT
+
 
 class Photo(AbstractImage):
     class Meta:
@@ -42,22 +44,13 @@ class Photo(AbstractImage):
 
     def hide(self) -> None:
         self.hidden = True
-        # TODO: delete in clickhouse
-        self.save(update_fields=('hidden',))
-
-    def recover(self) -> None:
-        self.hidden = False
-        # TODO: recover in clickhouse
+        RETRIEVER_CLIENT.hide(self.id)
         self.save(update_fields=('hidden',))
 
     def get_upload_to(self, filename: str) -> str:
         parts = filename.rsplit('.', 1) or ['']
         ext = parts[-1]
         return super().get_upload_to(uuid.uuid4().hex + '.' + ext)
-
-    def delete(self, *args, **kwargs) -> None:
-        # TODO: delete in clickhouse
-        super().delete()
 
 
 class PhotoRendition(AbstractRendition):

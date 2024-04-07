@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  web:
+    image: cr.yandex/crpcdc95v6n45r0mo3lp/travel-bakend
+    restart: always
+    command: /start
+    volumes:
+      - .:/app
+      - /config:/$HOME/.yamjam
+    ports:
+      - 8000:8000
