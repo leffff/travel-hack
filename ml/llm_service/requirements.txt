@@ -1,0 +1,15 @@
+numpy
+pandas
+torch
+transformers
+accelerate
+requests
+socks
+libretranslate
+datasets
+libretranslatepy
+fastapi
+uvicorn
+pydantic
+python-multipart
+bitsandbytes

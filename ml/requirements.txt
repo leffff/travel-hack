@@ -14,3 +14,8 @@ datasets
 clickhouse_driver
 nltk
 libretranslatepy
+catboost
+fastapi
+uvicorn
+pydantic
+python-multipart
