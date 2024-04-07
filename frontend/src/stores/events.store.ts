@@ -1,8 +1,9 @@
+import { ImagesEndpoint } from "@/api/endpoints/image.endpoint";
 import { ImageDto, mockImages } from "@/api/models/image.model";
 import { TravelGptViewModel } from "@/components/TravelGPT/travel-gpt.vm";
 import { SearchViewModel } from "@/components/events/Search/serach.vm";
 import { EventFiltersViewModel } from "@/components/events/filters/filters.vm";
-import { downloadImage } from "@/lib/utils/download-image";
+import { downloadImage, getFileFromUrl } from "@/lib/utils/download-image";
 import { ImageGrid, groupImagesIntoGrids } from "@/lib/utils/group-image";
 import { makeAutoObservable } from "mobx";
 
@@ -13,7 +14,7 @@ export class EventsViewModel {
 
   loading = false;
 
-  private images: ImageDto.Item[] = mockImages;
+  public images: ImageDto.Item[] = mockImages;
   get groupedImages(): ImageGrid[] {
     return groupImagesIntoGrids(this.images);
   }
@@ -30,8 +31,12 @@ export class EventsViewModel {
 
   async openImage(image: ImageDto.Item) {
     this.expandedImage = image;
-    this.relevantImages = [];
-    this.relevantImages = this.images.filter((i) => i.id !== image.id);
+    const imageFile = await getFileFromUrl(image.imgSrc);
+    if (!imageFile) return;
+
+    console.log("searching by image", imageFile.size);
+    const res = await ImagesEndpoint.searchByImage(imageFile);
+    this.relevantImages = res;
   }
 
   toggleImage(image: ImageDto.Item) {
@@ -42,9 +47,8 @@ export class EventsViewModel {
     this.selectedImages.add(image);
   }
 
-  downloadSelectedImages() {
-    console.log("download selected images", this.selectedImages);
-    this.selectedImages.forEach((image) => downloadImage(image.imgSrc));
+  async downloadSelectedImages() {
+    await Promise.all([...this.selectedImages].map((image) => downloadImage(image.imgSrc)));
     this.selectedImages = new Set();
   }
 
@@ -58,6 +62,8 @@ export class EventsViewModel {
       this.loading = false;
     }, 1000);
   }
+
+  rateUsWasShown = false;
 
   travelGptVm = new TravelGptViewModel(this);
   searchVm = new SearchViewModel(this);

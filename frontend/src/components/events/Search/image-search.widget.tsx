@@ -36,30 +36,26 @@ export const ImageSearch: FCVM<SearchViewModel> = observer(({ vm }) => {
               dragOverImage && "border-solid border-primary/50 bg-primary/5",
               vm.imageSearchLoading && "opacity-50 pointer-events-none"
             )}>
-            {vm.imageSearchLoading ? (
-              <Spinner />
-            ) : (
-              <>
-                <input
-                  type="file"
-                  className="absolute opacity-0 inset-0 cursor-pointer"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      vm.onImageUpload(file);
-                    }
-                    setDragOverImage(false);
-                  }}
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setDragOverImage(true);
-                  }}
-                  onDragLeave={() => setDragOverImage(false)}
-                />
-                <UploadIcon className="size-8 text-text-secondary absolute inset-auto" />
-              </>
-            )}
+            {vm.imageSearchLoading && <Spinner />}
+            <input
+              type="file"
+              className="absolute opacity-0 inset-0 cursor-pointer"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  console.log(file);
+                  vm.onImageUpload(file);
+                }
+                setDragOverImage(false);
+              }}
+              onDragOver={(e) => {
+                e.preventDefault();
+                setDragOverImage(true);
+              }}
+              onDragLeave={() => setDragOverImage(false)}
+            />
+            <UploadIcon className="size-8 text-text-secondary absolute inset-auto" />
           </div>
         </div>
       </DialogBase>

@@ -3,5 +3,6 @@ export const ELEVATION = {
   dialogBackdrop: 14,
   dialog: 15,
   carousel: 13,
-  travelGpt: 12
+  travelGpt: 12,
+  gallerySpinner: 5
 };

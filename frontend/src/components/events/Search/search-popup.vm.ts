@@ -50,7 +50,5 @@ export class SearchPopupViewModel {
     this.selected = null;
   }
 
-  get tagsLeft(): number {
-    return 456;
-  }
+  tagsLeft = 0;
 }

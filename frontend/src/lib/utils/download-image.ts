@@ -1,5 +1,10 @@
 export const downloadImage = (imageUrl: string, filename?: string | null) => {
-  fetch(imageUrl)
+  return fetch(imageUrl, {
+    mode: "no-cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
     .then((response) => response.blob())
     .then((blob) => {
       // Create a blob URL
@@ -15,4 +20,13 @@ export const downloadImage = (imageUrl: string, filename?: string | null) => {
       window.URL.revokeObjectURL(url);
     })
     .catch((e) => console.error(e));
+};
+
+export const getFileFromUrl = async (url: string): Promise<File> => {
+  const res = await (await fetch(`https://cors-anywhere.herokuapp.com/${url}`)).blob();
+  const file = new File([res], `downloadedImage.${url.split(".").pop() || "jpg"}`, {
+    type: res.type
+  });
+
+  return file;
 };

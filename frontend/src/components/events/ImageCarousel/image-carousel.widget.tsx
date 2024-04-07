@@ -11,8 +11,10 @@ import { convertFileSize } from "@/lib/utils/convert-file-size";
 import DownloadIcon from "@/assets/icons/download.svg";
 import { Spinner } from "@/components/ui/Spinner";
 import { downloadImage } from "@/lib/utils/download-image";
+import { RateUsWidget } from "@/components/RateUs/rate-us.widget";
 
 export const ImageCarousel: FCVM<EventsViewModel> = observer(({ vm }) => {
+  const [showRateUs, setShowRateUs] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
   const [licenseAccepted, setLicenseAccepted] = useState(false);
@@ -40,6 +42,17 @@ export const ImageCarousel: FCVM<EventsViewModel> = observer(({ vm }) => {
     }
   }, [vm.expandedImage]);
 
+  useEffect(() => {
+    if (vm.rateUsWasShown || !vm.expandedImage) return;
+
+    const timeout = setTimeout(() => {
+      setShowRateUs(true);
+      vm.rateUsWasShown = true;
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [vm.rateUsWasShown, vm, vm.expandedImage]);
+
   return (
     <Transition appear show={expanded} as={Fragment}>
       <Dialog
@@ -47,6 +60,7 @@ export const ImageCarousel: FCVM<EventsViewModel> = observer(({ vm }) => {
         style={{ zIndex: ELEVATION.carousel }}
         onSubmit={(e) => e.preventDefault()}
         onClose={() => onClose()}>
+        <RateUsWidget show={showRateUs} setShow={(v) => setShowRateUs(v)} />
         <div
           className="fixed inset-0 overflow-auto text-white"
           style={{ zIndex: ELEVATION.carousel }}>

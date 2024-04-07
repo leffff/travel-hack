@@ -66,7 +66,7 @@ export const SearchPopup: FCVM<SearchPopupViewModel> = observer((x) => {
   return (
     <div
       ref={ref}
-      className="appear absolute top-[calc(100%+8px)] rounded-xl left-0 w-full px-12 py-8 bg-white text-bg flex flex-col shadow-dropdown"
+      className="appear absolute top-[calc(100%+8px)] rounded-xl left-0 w-full px-4 sm:px-12 py-8 bg-white text-bg flex flex-col shadow-dropdown"
       style={{ zIndex: ELEVATION.searchPopup }}>
       {x.vm.parentVm.isLoading ? (
         <div className="flex items-center justify-center h-40">
@@ -85,6 +85,11 @@ export const SearchPopup: FCVM<SearchPopupViewModel> = observer((x) => {
               />
             ))}
           </ul>
+          {x.vm.searchedTags.size === 0 && (
+            <span className="flex p-4 pb-0 text-text-secondary">
+              По вашему запросу ничего не найдено
+            </span>
+          )}
           {x.vm.tagsLeft > 0 && (
             <span className="flex p-4 pb-0 text-text-secondary">
               Еще тегов по запросу: {x.vm.tagsLeft}. Для отображения скорректируйте запрос

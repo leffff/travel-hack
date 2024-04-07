@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { FilterGroupViewModel } from "./filter-group.store";
+import { ImageDto, ImageFilters } from "@/api/models/image.model";
 
 interface FiltersTemplate {
   timeOfYear: string[] | null;
@@ -8,8 +9,8 @@ interface FiltersTemplate {
   format: string[] | null;
 }
 
-const convertFilter = <T extends string>(filters: Set<T>): T[] | null => {
-  return filters.size > 0 ? Array.from(filters) : null;
+const convertFilter = <T extends string>(filters: Set<T>): T | null => {
+  return filters.size > 0 ? Array.from(filters)[0]! : null;
 };
 
 export class EventFiltersViewModel {
@@ -18,14 +19,27 @@ export class EventFiltersViewModel {
   }
 
   showFilters = false;
-  timeOfYear = new FilterGroupViewModel("Время года", ["Зима", "Весна", "Лето", "Осень"] as const);
-  timeOfDay = new FilterGroupViewModel("Время суток", ["Утро", "День", "Вечер", "Ночь"] as const);
-  screenOrientation = new FilterGroupViewModel("Ориентация", [
-    "Горизонтальная",
-    "Вертикальная",
-    "Квадратная"
-  ] as const);
-  format = new FilterGroupViewModel("Формат", ["JPG", "PNG", "WEBP"] as const);
+  timeOfYear = new FilterGroupViewModel<keyof typeof ImageFilters.TimeOfYear>("Время года", [
+    "Зима",
+    "Весна",
+    "Лето",
+    "Осень"
+  ]);
+  timeOfDay = new FilterGroupViewModel<keyof typeof ImageFilters.TimeOfDay>("Время суток", [
+    "Утро",
+    "День",
+    "Вечер",
+    "Ночь"
+  ]);
+  screenOrientation = new FilterGroupViewModel<keyof typeof ImageFilters.ScreenOrientation>(
+    "Ориентация",
+    ["Горизонтальная", "Вертикальная", "Квадратная"]
+  );
+  format = new FilterGroupViewModel<keyof typeof ImageFilters.Format>("Формат", [
+    "JPG",
+    "PNG",
+    "WEBP"
+  ]);
 
   getFilters() {
     return {
