@@ -54,6 +54,7 @@ export class SearchViewModel {
     this._tags.clear();
     this.search = "";
     this.popupVm.hide();
+    this.parent.filtersVm.clearFilters();
   }
 
   async onSubmit() {

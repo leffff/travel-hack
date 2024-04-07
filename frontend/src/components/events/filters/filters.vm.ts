@@ -49,4 +49,11 @@ export class EventFiltersViewModel {
       format: convertFilter(this.format.selectedTags)
     };
   }
+
+  clearFilters() {
+    this.timeOfYear.selectedTags.clear();
+    this.timeOfDay.selectedTags.clear();
+    this.screenOrientation.selectedTags.clear();
+    this.format.selectedTags.clear();
+  }
 }
