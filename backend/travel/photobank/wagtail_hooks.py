@@ -57,11 +57,12 @@ class MappingPanel(FieldPanel):
 class BasePhotoAdmin(ThumbnailMixin, ModelAdmin):
     model = Photo
     menu_icon = 'image'
-    list_display = ('admin_thumb', 'title', 'display_tags', 'created_at')
+    list_display = ('admin_thumb', 'title', 'display_tags', 'status', 'created_at')
     thumb_image_width = 60
     list_display_add_buttons = 'title'
     ordering = ('-created_at',)
-    list_filter = ('tags',)
+    list_filter = ('season', 'daytime', 'orientation', 'extension', 'tags')
+    list_per_page = 15
 
     def admin_thumb(self, obj):
         # hacked version of ThumbnailMixin.admin_thumb but image=obj
@@ -77,7 +78,10 @@ class BasePhotoAdmin(ThumbnailMixin, ModelAdmin):
         return mark_safe('<img{}>'.format(flatatt(img_attrs)))
 
     def display_tags(self, obj):
-        return format_html(', '.join([tag.name for tag in obj.tags.all()]) or '–')
+        s = format_html(', '.join([tag.name for tag in obj.tags.all()]) or '–')
+        if len(s) > 16:
+            s = s[:16] + '...'
+        return s
 
     display_tags.short_description = _('Tags')
 
@@ -90,6 +94,7 @@ class BasePhotoAdmin(ThumbnailMixin, ModelAdmin):
                 ReadOnlyPanel('created_at'),
                 ReadOnlyPanel('hidden'),
                 ReadOnlyPanel('superresolution', heading=_('Improved quality')),
+                ReadOnlyPanel('is_duplicate', classname='col6'),
             ),
             classname='col6',
         ),

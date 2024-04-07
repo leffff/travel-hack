@@ -1,3 +1,4 @@
+import logging
 from functools import cached_property
 
 import boto3
@@ -8,6 +9,8 @@ from photobank.models import Photo
 from tools.clients.retriever import RetrieverClient
 from tools.clients.superresolution import SuperResolutionClient
 from travel import celery_app
+
+logger = logging.getLogger(__name__)
 
 
 class ProcessPhotoTask(Task):
@@ -62,16 +65,30 @@ class ProcessPhotoTask(Task):
 
     def run(self, photo_pk: int) -> None:
         photo = Photo.objects.get(pk=photo_pk)
-        photo.status = Photo.PhotoStatus.IN_PROGRESS
-        photo.save(update_fields=('status',))
+        try:
+            photo.status = Photo.PhotoStatus.IN_PROGRESS
+            photo.save(update_fields=('status',))
 
-        if photo.superresolution:
-            self.proceed_superresolution(photo)
+            if photo.superresolution:
+                self.proceed_superresolution(photo)
 
-        self.retriever_add(photo)
+            self.retriever_add(photo)
 
-        photo.status = Photo.PhotoStatus.READY
-        photo.save(update_fields=('status',))
+            photo.status = Photo.PhotoStatus.READY
+            photo.save(update_fields=('status',))
+        except Exception:
+            logger.exception('tasks.ProcessPhotoTask Error')
+            photo.status = Photo.PhotoStatus.FAIL
+            photo.save(update_fields=('status',))
 
 
 celery_app.register_task(ProcessPhotoTask())
+
+
+class CreateRendition(Task):
+    def run(self, photo_pk: int):
+        photo = Photo.objects.get(pk=photo_pk)
+        photo.get_rendition('fill-1536x1536|jpegquality-60')
+
+
+celery_app.register_task(CreateRendition())

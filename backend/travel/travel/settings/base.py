@@ -28,6 +28,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    "rest_framework",
+    'corsheaders',
     "photobank",
 
     "home",
@@ -53,13 +55,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "storages",
-    "rest_framework",
 ]
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -192,5 +193,10 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 # PhotoBank
 WAGTAILIMAGES_IMAGE_MODEL = 'photobank.Photo'
+WAGTAILIMAGES_MAX_UPLOAD_SIZE = 50 * 1024 * 1024  # 50 MB
 
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CORS_ORIGIN_ALLOW_ALL = True
+from corsheaders.defaults import default_headers
+CORS_ALLOW_HEADERS = (*default_headers, 'ngrok-skip-browser-warning')

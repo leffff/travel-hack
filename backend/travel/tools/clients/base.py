@@ -13,6 +13,7 @@ class BaseClient(ABC):
         return f'{self.host}/{path}/'
 
     def make_request(self, method: str, url: str, **params) -> requests.Response:
+        params.setdefault('timeout', 30 * 60)
         r = requests.request(method, url, **params)
         r.raise_for_status()
         return r

@@ -38,20 +38,8 @@ class IndexViewButtonHelper(BaseButtonHelper):
 
 
 class HiddenViewButtonHelper(BaseButtonHelper):
-    delete_button_classnames = ["warning"]
-
     def add_button(self, classnames_add=None, classnames_exclude=None):
         return None
 
     def edit_button(self, pk, classnames_add=None, classnames_exclude=None):
         return None
-
-    def delete_button(self, pk, classnames_add=None, classnames_exclude=None):
-        # Переопределяем delete-action на recover
-        default = super().delete_button(pk, classnames_add, classnames_exclude)
-        default.update({
-            "url": self.url_helper.get_action_url("recover", quote(pk)),
-            "label": _("Recover"),
-            "title": _("Recover %(object)s") % {"object": self.verbose_name},
-        })
-        return default

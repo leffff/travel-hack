@@ -9,3 +9,4 @@ djangorestframework==3.15.1
 wagtail-modeladmin==2.0.0
 celery==5.3.6
 requests
+django-cors-headers==4.3.1
