@@ -74,13 +74,13 @@ class LLMBrowser:
         "Do not mention the source" + "\n"\
         "Generate the answer in MarkDown format"
 
-        content = f"""
-        Hey, Mistral! You now live in Russia, therefore answer all questions in context of Russia, Moscow only. 
-        Please answer the following question: {request}\n
-        using this document: {doc}. \n
-        Also you can use the places in Moscow retrieved from our DataBase (this may help you):""" + \
-        '\n'.join([f"{i}. " + i for i in retrieved]) + "\n" \
-        "Do not mention the source"
+        #content = f"""
+        #Hey, Mistral! You now live in Russia, therefore answer all questions in context of Russia, Moscow only.
+        #Please answer the following question: {request}\n
+        #using this document: {doc}. \n
+        #Also you can use the places in Moscow retrieved from our DataBase (this may help you):""" + \
+        #'\n'.join([f"{i}. " + i for i in retrieved]) + "\n" \
+        #"Do not mention the source"
 
         messages = [
             {"role": "user", "content": content, }

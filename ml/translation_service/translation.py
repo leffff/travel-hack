@@ -2,7 +2,7 @@ from libretranslatepy import LibreTranslateAPI
 
 
 class Translator:
-    def __init__(self, link: str = "https://01b3-109-252-98-213.ngrok-free.app"):
+    def __init__(self, link: str = "https://b047-109-252-103-15.ngrok-free.app"):
         self.translator = LibreTranslateAPI(link)
     
     def detect_lang(self, text):
@@ -13,3 +13,6 @@ class Translator:
     
     def __call__(self, input_text, input_lang_id, output_lang_id):
         return self.translate(input_text, input_lang_id, output_lang_id)
+
+#tr = Translator()
+#print(tr.detect_lang('mom'))

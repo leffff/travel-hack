@@ -1,4 +1,3 @@
-import json
 import sys
 from io import BytesIO
 from urllib.parse import urlparse
@@ -499,7 +498,8 @@ class Retriever:
 
         torch.cuda.empty_cache()
         # print(retrieved.columns, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        return {"id": retrieved["id"].tolist(), "img_url": retrieved["img_url"].tolist(), "name": retrieved["name"].tolist()}
+        return {"id": retrieved["id"].tolist(), "img_url": retrieved["img_url"].tolist(),
+                "name": retrieved["name"].tolist()}
 
     def __len__(self):
         return self.clickhouse.get_num_samples()

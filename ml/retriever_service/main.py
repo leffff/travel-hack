@@ -1,10 +1,12 @@
 import sys
+from datetime import time, datetime
 
 import nltk
 import ruclip
 from clickhouse_driver import Client
 from fastapi import FastAPI
 from pydantic import BaseModel
+from starlette.middleware.cors import CORSMiddleware
 from tqdm.auto import tqdm
 
 sys.path.append("../")
@@ -17,10 +19,16 @@ from ood import OOD
 tqdm.pandas()
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 device = 'cuda'
 
-link = "https://b047-109-252-103-15.ngrok-free.app/"
+link = "https://b047-109-252-103-15.ngrok-free.app"
 translator = Translator(link)
 
 clickhouse = ClickHouse(
@@ -91,6 +99,7 @@ class QueryParams(BaseModel):
 
 @app.post("/retriever/query")
 def retriever_query(params: QueryParams):
+    print(datetime.now(), params.img_url, params.text, "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
     response = retriever.query(
         img_url=params.img_url,
         text=params.text,

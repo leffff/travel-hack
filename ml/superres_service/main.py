@@ -9,6 +9,8 @@ from PIL import Image
 import requests
 from urllib.parse import urlparse
 
+from starlette.middleware.cors import CORSMiddleware
+
 from superres import SuperResolutionModel
 
 
@@ -18,7 +20,13 @@ class SuperResRequestParams(BaseModel):
 
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 model_id: str = "CompVis/ldm-super-resolution-4x-openimages"
 num_steps: int = 50
 device: str = "cuda"
