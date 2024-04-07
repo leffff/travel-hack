@@ -11,24 +11,44 @@ class Photo(AbstractImage):
         verbose_name_plural = _('Photos')
 
     class PhotoStatus(models.TextChoices):
-        NEW = 'NEW'
-        IN_PROGRESS = 'INP'
-        READY = 'RED'
+        NEW = 'NEW', _('New')
+        WAIT_PROCESSING = 'WPR', _('Wait processing')
+        IN_PROGRESS = 'INP', _('In progress')
+        READY = 'RED', _('Ready')
+        FAIL = 'FAL', _('Fail')
+
+    class Season(models.TextChoices):
+        WINTER = 'зима', _('Winter')
+        SPRING = 'весна', _('Spring')
+        SUMMER = 'лето', _('Summer')
+        FALL = 'осень', _('Fall')
+
+    class Daytime(models.TextChoices):
+        NIGHT = 'ночь', _('Night')
+        MORNING = 'утро', _('Morning')
+        DAY = 'день', _('Day')
+        EVENING = 'вечер', _('Evening')
 
     status = models.CharField(max_length=3, choices=PhotoStatus, default=PhotoStatus.NEW)
     hidden = models.BooleanField(default=False)
+    superresolution = models.BooleanField(default=False, verbose_name=_('Improve quality'))
+    is_duplicate = models.BooleanField(default=False, verbose_name=_('Duplicate'))
+    orientation = models.CharField(max_length=16, null=True)
+    extension = models.CharField(max_length=8, null=True)
+    daytime = models.CharField(max_length=16, choices=Daytime, null=True)
+    season = models.CharField(max_length=16, choices=Season, null=True)
 
-    admin_form_fields = ('title', 'file')
+    admin_form_fields = ('title', 'file', 'superresolution')
 
     def hide(self) -> None:
         self.hidden = True
         # TODO: delete in clickhouse
-        self.save(update_fields=('hidden', ))
+        self.save(update_fields=('hidden',))
 
     def recover(self) -> None:
         self.hidden = False
         # TODO: recover in clickhouse
-        self.save(update_fields=('hidden', ))
+        self.save(update_fields=('hidden',))
 
     def get_upload_to(self, filename: str) -> str:
         parts = filename.rsplit('.', 1) or ['']

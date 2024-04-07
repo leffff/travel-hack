@@ -45,6 +45,15 @@ class HumanSizePanel(ReadOnlyPanel):
             return human_size(super().value_from_instance)
 
 
+class MappingPanel(FieldPanel):
+    class BoundPanel(FieldPanel.BoundPanel):
+        MAPPING: dict
+
+        @cached_property
+        def value_from_instance(self) -> str:
+            return self.MAPPING[super().value_from_instance]
+
+
 class BasePhotoAdmin(ThumbnailMixin, ModelAdmin):
     model = Photo
     menu_icon = 'image'
@@ -76,9 +85,11 @@ class BasePhotoAdmin(ThumbnailMixin, ModelAdmin):
         MultiFieldPanel(
             (
                 FieldPanel('title'),
+                ReadOnlyPanel('status', heading=_('Status')),
                 FieldPanel('tags'),
                 ReadOnlyPanel('created_at'),
                 ReadOnlyPanel('hidden'),
+                ReadOnlyPanel('superresolution', heading=_('Improved quality')),
             ),
             classname='col6',
         ),
@@ -86,10 +97,14 @@ class BasePhotoAdmin(ThumbnailMixin, ModelAdmin):
             (
                 ImageDisplayPanel('file', classname='col6'),
                 FieldRowPanel(children=(
-                    HumanSizePanel('file_size'),
+                    HumanSizePanel('file_size', heading=_('File size')),
                     ReadOnlyPanel('width'),
                     ReadOnlyPanel('height'),
                 ), classname='col6'),
+                ReadOnlyPanel('orientation', classname='col6'),
+                ReadOnlyPanel('extension', classname='col6'),
+                FieldPanel('season', classname='col6'),
+                FieldPanel('daytime', classname='col6'),
             ),
         )
     ]
@@ -131,6 +146,7 @@ modeladmin_register(PhotoGroupAdmin)
 @hooks.register('construct_main_menu')
 def hide_menu_items(request, menu_items):
     menu_items[:] = [item for item in menu_items if item.name in ENABLED_MENU_ITEMS]
+
 
 @hooks.register('insert_global_admin_css')
 def global_admin_css():
