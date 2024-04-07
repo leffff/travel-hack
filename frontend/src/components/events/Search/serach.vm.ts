@@ -64,7 +64,7 @@ export class SearchViewModel {
 
     this.popupVm.hide();
 
-    console.log("searching...", this.search);
+    this.parent.onSearch();
 
     this.isLoading = false;
   }

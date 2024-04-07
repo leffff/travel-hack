@@ -7,7 +7,7 @@ import { ELEVATION } from "@/lib/constants/elevation";
 
 export const ImageFeed: FCVM<EventsViewModel> = observer(({ vm }) => {
   return (
-    <div className="flex flex-col pt-4 gap-1 relative">
+    <div className="flex flex-col pt-4 gap-1 relative min-h-[60vh]">
       {vm.loading && (
         <div
           className="absolute top-4 rounded-xl inset-0 flex bg-white/60"

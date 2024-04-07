@@ -14,7 +14,7 @@ export class EventsViewModel {
 
   loading = false;
 
-  public images: ImageDto.Item[] = mockImages;
+  public images: ImageDto.Item[] = [];
   get groupedImages(): ImageGrid[] {
     return groupImagesIntoGrids(this.images);
   }
@@ -57,10 +57,22 @@ export class EventsViewModel {
     const filters = this.filtersVm.getFilters();
     const search = this.searchVm.getSearch();
 
-    console.log(search, filters);
-    setTimeout(() => {
+    try {
+      const res = await ImagesEndpoint.runQuery({
+        daytime_filter: filters.timeOfDay ?? undefined,
+        extension_filter: filters.format ?? undefined,
+        orientation_filter: filters.screenOrientation ?? undefined,
+        season_filter: filters.timeOfYear ?? undefined,
+        tags: search.tags,
+        text: search.search
+      });
+
+      this.images = res;
+    } catch (e) {
+      this.images = [];
+    } finally {
       this.loading = false;
-    }, 1000);
+    }
   }
 
   rateUsWasShown = false;
