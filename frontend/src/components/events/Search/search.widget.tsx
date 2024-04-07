@@ -94,7 +94,7 @@ export const SearchWidget: FCVM<SearchViewModel> = observer(({ vm }) => {
           </>
         )}
       </Button>
-      <Button>
+      <Button onClick={() => vm.parent.onSearch()}>
         Найти
         <SearchIcon className="size-6" />
       </Button>

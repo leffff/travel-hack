@@ -16,7 +16,7 @@ const FilterGroup = observer(<T extends string>({ vm }: { vm: FilterGroupViewMod
             size={16}
             checked={vm.selectedTags.has(tag)}
             onClick={() => {
-              vm.selectedTags.has(tag) ? vm.selectedTags.delete(tag) : vm.selectedTags.add(tag);
+              vm.selectedTags = new Set([tag]);
             }}
           />
         </li>

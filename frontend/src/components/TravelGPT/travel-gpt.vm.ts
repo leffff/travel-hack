@@ -47,15 +47,46 @@ export class TravelGptViewModel {
     this.loading = true;
     this._chatMessages.push({
       text: this.text,
-      id: Date.now().toString(),
+      id: Math.random().toString(),
       author: "user",
       date: new Date()
     });
-    this.text = "";
 
-    setTimeout(() => {
+    try {
+      const text = this.text;
+      this.text = "";
+
+      const res: {
+        text_result: string;
+        img_urls: string[];
+      } = await fetch("https://293a-176-100-240-67.ngrok-free.app/llm_browser/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Allow-Control-Allow-Origin": "*"
+        },
+        signal: AbortSignal.timeout(1200000),
+        body: JSON.stringify({ request: text, max_new_tokens: 500 })
+      }).then((res) => res.json());
+
+      this._chatMessages.push({
+        text: res.text_result,
+        id: Math.random().toString(),
+        images: res.img_urls,
+        author: "bot",
+        date: new Date()
+      });
+    } catch (e) {
+      console.log(e);
+      this._chatMessages.push({
+        text: "Произошла ошибка",
+        id: Math.random().toString(),
+        date: new Date(),
+        author: "bot"
+      });
+    } finally {
       this.loading = false;
-    }, 1000);
+    }
   }
 
   selectedMessage: ChatMessage | null = null;

@@ -14,7 +14,6 @@ interface Props {
 export const ImageRow: FC<Props> = observer((x) => {
   return (
     <div
-      onClick={() => x.vm.openImage(x.images[0])}
       className={cn(
         "md:grid gap-1 md:grid-rows-[1fr,1fr]",
         x.layout === 1 && "grid-cols-[1fr,1fr,1fr,1fr]",
@@ -28,7 +27,8 @@ export const ImageRow: FC<Props> = observer((x) => {
 
         return (
           <div
-            key={image.id}
+            key={image.imgSrc}
+            onClick={() => x.vm.openImage(image)}
             className={cn(
               "relative group h-[500px] cursor-pointer rounded-lg",
               x.layout === 1 &&

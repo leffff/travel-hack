@@ -9,6 +9,59 @@ export namespace ImageDto {
     imgSrc: string;
     location: [number, number];
   }
+
+  export interface Result {
+    id: number;
+    title: string;
+    width: number;
+    height: number;
+    created_at: string;
+    status: string;
+    file: string;
+    file_size: number;
+    rendition_url?: string;
+  }
+
+  export const convertDto = (dto: Result): Item => {
+    return {
+      id: dto.id.toString(),
+      title: dto.title,
+      tags: [],
+      extension: "jpg",
+      fileSize: dto.file_size,
+      resolution: [dto.width, dto.height],
+      imgSrc: dto.rendition_url ?? dto.file,
+      location: [0, 0]
+    };
+  };
+}
+
+export namespace ImageFilters {
+  export enum TimeOfYear {
+    "Зима" = "Зима",
+    "Весна" = "Весна",
+    "Лето" = "Лето",
+    "Осень" = "Осень"
+  }
+
+  export enum TimeOfDay {
+    "Утро" = "Утро",
+    "День" = "День",
+    "Вечер" = "Вечер",
+    "Ночь" = "Ночь"
+  }
+
+  export enum ScreenOrientation {
+    "Горизонтальная" = "Горизонтальная",
+    "Вертикальная" = "Вертикальная",
+    "Квадратная" = "Квадратная"
+  }
+
+  export enum Format {
+    "JPG" = "JPG",
+    "PNG" = "PNG",
+    "WEBP" = "WEBP"
+  }
 }
 
 export const mockImages: ImageDto.Item[] = [

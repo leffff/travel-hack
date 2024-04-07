@@ -1,15 +1,15 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { getStoredAuthToken, removeStoredAuthToken } from "./authToken";
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+axios.defaults.baseURL =
+  import.meta.env.VITE_API_URL ?? "https://d34f-176-100-240-67.ngrok-free.app";
 
 const get = <T>(path: string, config?: AxiosRequestConfig<unknown>): Promise<T> =>
   new Promise((resolve, reject) => {
     axios
       .get(path, {
         headers: {
-          Authorization: getStoredAuthToken() ? `Bearer ${getStoredAuthToken()}` : undefined,
-          "Access-Control-Allow-Origin": "*"
+          "ngrok-skip-browser-warning": "true"
         },
         ...config
       })
@@ -36,8 +36,7 @@ const post = <T>(
       .post(path, variables, {
         ...config,
         headers: {
-          Authorization: getStoredAuthToken() ? `Bearer ${getStoredAuthToken()}` : undefined,
-          "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": "true",
           ...config?.headers
         }
       })
@@ -66,8 +65,7 @@ const put = <T>(
     axios
       .put(path, variables, {
         headers: {
-          Authorization: getStoredAuthToken() ? `Bearer ${getStoredAuthToken()}` : undefined,
-          "Access-Control-Allow-Origin": "*"
+          "ngrok-skip-browser-warning": "true"
         },
         ...config
       })
@@ -92,8 +90,7 @@ const del = <T>(path: string, config?: AxiosRequestConfig<unknown>): Promise<T> 
     axios
       .delete(path, {
         headers: {
-          Authorization: getStoredAuthToken() ? `Bearer ${getStoredAuthToken()}` : undefined,
-          "Access-Control-Allow-Origin": "*"
+          "ngrok-skip-browser-warning": "true"
         },
         ...config
       })

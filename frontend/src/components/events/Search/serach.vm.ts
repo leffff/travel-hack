@@ -2,26 +2,13 @@ import { makeAutoObservable } from "mobx";
 import { SearchPopupViewModel } from "./search-popup.vm";
 import { debounce, debounceAsync } from "@/lib/utils/debounce";
 import { EventsViewModel } from "@/stores/events.store";
-
-const mockTags = [
-  "tag1",
-  "tag2",
-  "tag3",
-  "tag4",
-  "tag5",
-  "tag6",
-  "tag7",
-  "tag8",
-  "tag9",
-  "tag10",
-  "tag11",
-  "tag12"
-];
+import { TagsEndpoint } from "@/api/endpoints/tags.endpoint";
+import { ImagesEndpoint } from "@/api/endpoints/image.endpoint";
 
 export class SearchViewModel {
   constructor(public parent: EventsViewModel) {
     makeAutoObservable(this);
-    this.popupVm.searchedTags = new Set(mockTags);
+    this.popupVm.searchedTags = new Set();
   }
 
   isLoading = false;
@@ -34,23 +21,24 @@ export class SearchViewModel {
       this.search = search;
     }
     this.popupVm.visible = search.length > 0;
-    this.popupVm.searchedTags = new Set(mockTags.filter((tag) => tag.includes(this.search)));
     this.isLoading = true;
     this.findTags(search);
   }
 
   private findTags = debounceAsync(async (search: string) => {
-    console.log("searching...", search);
+    if (search === "") {
+      this.isLoading = false;
+      return;
+    }
+    const res = await TagsEndpoint.searchByName(search);
+    this.popupVm.searchedTags = new Set(res.tags);
+    this.popupVm.tagsLeft = res.count - res.tags.length;
     this.isLoading = false;
   }, 500);
 
-  private _tags: Set<string> = new Set(mockTags);
+  private _tags: Set<string> = new Set();
   get selectedTags(): Set<string> {
     return this._tags;
-  }
-
-  get searchedTags(): string[] {
-    return mockTags.filter((tag) => tag.includes(this.search));
   }
 
   addTag(tag: string) {
@@ -68,7 +56,7 @@ export class SearchViewModel {
     this.popupVm.hide();
   }
 
-  onSubmit = async () => {
+  async onSubmit() {
     if (this.popupVm.selected !== null) {
       return; // handled by popup
     }
@@ -76,10 +64,10 @@ export class SearchViewModel {
 
     this.popupVm.hide();
 
-    console.log("searching...", this.search);
+    this.parent.onSearch();
 
     this.isLoading = false;
-  };
+  }
 
   getSearch() {
     return {
@@ -91,8 +79,11 @@ export class SearchViewModel {
   imageSearchLoading = false;
   async onImageUpload(file: File) {
     this.imageSearchLoading = true;
-    console.log("uploading image...", file);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    this.imageSearchLoading = false;
+    try {
+      const res = await ImagesEndpoint.searchByImage(file);
+      this.parent.images = res;
+    } finally {
+      this.imageSearchLoading = false;
+    }
   }
 }

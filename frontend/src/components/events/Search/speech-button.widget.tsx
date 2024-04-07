@@ -13,6 +13,8 @@ export const SpeechButton: FCVM<SearchViewModel> = observer(({ vm }) => {
   const appendText = useMemo(
     () =>
       debounce((text: string) => {
+        if (text.length === 0) return; // prevent first debounce
+
         vm.updateSearch(" " + text, true);
         resetTranscript();
       }, 200),
@@ -36,6 +38,7 @@ export const SpeechButton: FCVM<SearchViewModel> = observer(({ vm }) => {
   return (
     <button
       className="h-fit"
+      type="button"
       onClick={() => {
         if (listening) {
           SpeechRecognition.stopListening();

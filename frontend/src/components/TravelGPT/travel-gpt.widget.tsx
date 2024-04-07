@@ -98,7 +98,9 @@ export const TravelGpt: FCVM<TravelGptViewModel> = observer(({ vm }) => {
                   className="flex-1 py-3 px-4 border rounded-xl pr-12 outline-primary"
                   placeholder="Напишите вопрос"
                 />
-                <SendIcon className="absolute right-4 cursor-pointer size-5 text-primary" />
+                <button className="absolute right-4 cursor-pointer w-fit h-fit text-primary">
+                  <SendIcon className="size-5" />
+                </button>
               </form>
             </div>
           ) : (
