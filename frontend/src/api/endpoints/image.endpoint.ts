@@ -58,7 +58,7 @@ export namespace ImagesEndpoint {
     formData.append("file", file);
 
     const res = await fetch(
-      "https://d34f-176-100-240-67.ngrok-free.app/api/photobank/photos/picture/",
+      "https://584e-45-137-112-248.ngrok-free.app/api/photobank/photos/picture/",
       {
         body: formData,
         method: "POST"

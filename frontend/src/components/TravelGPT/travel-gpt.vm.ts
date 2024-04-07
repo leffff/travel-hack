@@ -59,7 +59,7 @@ export class TravelGptViewModel {
       const res: {
         text_result: string;
         img_urls: string[];
-      } = await fetch("https://293a-176-100-240-67.ngrok-free.app/llm_browser/", {
+      } = await fetch("https://584e-45-137-112-248.ngrok-free.app/llm_browser/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
