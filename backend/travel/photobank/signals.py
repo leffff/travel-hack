@@ -9,4 +9,3 @@ from photobank.tasks import CreateRendition, ProcessPhotoTask
 def custom_action_after_image_upload(instance: Photo, **kwargs) -> None:
     if instance.status == Photo.PhotoStatus.WAIT_PROCESSING:
         ProcessPhotoTask().apply_async(kwargs={'photo_pk': instance.id})
-        CreateRendition().apply_async(kwargs={'photo_pk': instance.id})

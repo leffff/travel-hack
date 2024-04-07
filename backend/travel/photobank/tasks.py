@@ -83,12 +83,3 @@ class ProcessPhotoTask(Task):
 
 
 celery_app.register_task(ProcessPhotoTask())
-
-
-class CreateRendition(Task):
-    def run(self, photo_pk: int):
-        photo = Photo.objects.get(pk=photo_pk)
-        photo.get_rendition('fill-1536x1536|jpegquality-60')
-
-
-celery_app.register_task(CreateRendition())
