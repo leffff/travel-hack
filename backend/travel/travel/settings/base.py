@@ -120,11 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
@@ -167,13 +167,15 @@ STORAGES = {
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "travel"
-#
-# WAGTAIL_I18N_ENABLED = True
-#
-# WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
-#     ('en', "English"),
-#     ('ru', "Русский"),
-# ]
+
+WAGTAIL_I18N_ENABLED = True
+
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = WAGTAILADMIN_PERMITTED_LANGUAGES = [
+    # ('en', "English"),
+    ('ru', "Русский"),
+]
+
+LANGUAGE_CODE = LANGUAGES[0][0]
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
@@ -190,3 +192,5 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 # PhotoBank
 WAGTAILIMAGES_IMAGE_MODEL = 'photobank.Photo'
+
+CELERY_TASK_TIME_LIMIT = 30 * 60

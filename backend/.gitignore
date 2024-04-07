@@ -161,3 +161,7 @@ cython_debug/
 
 config.yaml
 media/
+
+**/.DS_Store
+
+**/*.db

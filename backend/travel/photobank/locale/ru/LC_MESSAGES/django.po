@@ -1,0 +1,310 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-07 04:42+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: admin/hide_view.py:11
+#, fuzzy
+#| msgid "Hidden photos"
+msgid "Hide Photo"
+msgstr "Скрытые фото"
+
+#: admin/hide_view.py:15
+#, fuzzy, python-format
+#| msgid "%(model_name)s '%(object)s' recovered."
+msgid "%(model_name)s '%(object)s' was hidden."
+msgstr "%(model_name)s '%(object)s' скрыто."
+
+#: admin/hide_view.py:25
+#, fuzzy, python-format
+#| msgid "Are you sure you want to recover this %(model_name)s?"
+msgid "Are you sure you want to hide this %(model_name)s?"
+msgstr "Вы уверены, что хотите скрыть  %(model_name)s?"
+
+#: admin/index_view.py:12 wagtail_hooks.py:159
+msgid "Actual photobank"
+msgstr "Банк актуальных фотографий"
+
+#: admin/index_view.py:16 wagtail_hooks.py:171
+msgid "Hidden photos"
+msgstr "Скрытые фото"
+
+#: admin/index_view.py:34
+msgid "Hide"
+msgstr "Скрыть"
+
+#: admin/index_view.py:35
+#, fuzzy, python-format
+#| msgid "Recover %(object)s"
+msgid "Hide %(object)s"
+msgstr "Скрыть %(object)s"
+
+#: admin/index_view.py:54 templates/recover_photo_view.html:25
+msgid "Recover"
+msgstr "Восстановить"
+
+#: admin/index_view.py:55
+#, python-format
+msgid "Recover %(object)s"
+msgstr "Восстановить %(object)s"
+
+#: admin/recover_view.py:11
+msgid "Recover Photo"
+msgstr "Восстановить Фото"
+
+#: admin/recover_view.py:15
+#, python-format
+msgid "%(model_name)s '%(object)s' recovered."
+msgstr "%(model_name)s '%(object)s' восстановлено."
+
+#: admin/recover_view.py:25
+#, python-format
+msgid "Are you sure you want to recover this %(model_name)s?"
+msgstr "Вы уверены, что хотите восстановить  %(model_name)s?"
+
+#: models.py:10
+#, fuzzy
+#| msgid "Photobank"
+msgid "Photo"
+msgstr "Фото"
+
+#: models.py:11
+#, fuzzy
+#| msgid "Photobank"
+msgid "Photos"
+msgstr "Фото"
+
+#: models.py:34
+msgid "Improve quality"
+msgstr "Улучшить качество"
+
+#: models.py:35
+msgid "Duplicate"
+msgstr "Дубликат"
+
+#: templates/hide_photo_view.html:15 templates/recover_photo_view.html:15
+#, fuzzy, python-format
+#| msgid "%(model_name)s '%(object)s' recovered."
+msgid "%(model_name)s could not be deleted"
+msgstr "%(model_name)s '%(object)s' восстановлено."
+
+#: templates/hide_photo_view.html:16 templates/recover_photo_view.html:16
+#, python-format
+msgid ""
+"'%(instance_name)s' is currently referenced by other objects, and cannot be "
+"deleted without jeopardising data integrity. To delete it successfully, "
+"first remove references from the following objects, then try again:"
+msgstr ""
+
+#: templates/hide_photo_view.html:20 templates/recover_photo_view.html:20
+msgid "Go back to listing"
+msgstr "Обратно к списку"
+
+#: templates/hide_photo_view.html:25
+msgid "Yes, hide"
+msgstr "Скрыть"
+
+#: templates/hide_photo_view.html:26
+msgid "No, don't hide"
+msgstr "Нет, не скрывать"
+
+#: templates/photos_summary_item.html:6
+#, python-format
+msgid ""
+"<span>%(total)s</span> Photo <span class=\"w-sr-only\">created in "
+"%(site_name)s</span>"
+msgid_plural ""
+"<span>%(total)s</span> Photos <span class=\"w-sr-only\">created in "
+"%(site_name)s</span>"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: templates/recover_photo_view.html:26
+msgid "No, don't recover"
+msgstr "Нет, не восстанавливать"
+
+#: templates/wagtailadmin/home.html:5
+msgid "Welcome to the RUSSPASS Photobank"
+msgstr "Добро пожаловать на медиабанк RUSSPASS"
+
+#: templates/wagtailimages/multiple/add.html:7
+msgid "Add images"
+msgstr "Добавить изображения"
+
+#: templates/wagtailimages/multiple/add.html:12
+msgid "Drag and drop images into this area to upload immediately."
+msgstr "Перетащите изображения для незамедлительной загрузки."
+
+#: templates/wagtailimages/multiple/add.html:17
+msgid "Or choose from your computer"
+msgstr "Или выберите на своем компьютере"
+
+#: templates/wagtailimages/multiple/add.html:44
+msgid ""
+"Upload successful. Please update this image with a more appropriate title, "
+"if necessary. You may also delete the image completely if the upload wasn't "
+"required."
+msgstr "Загрузка прошла успешно. Пожалуйста, обновите название фото, если это необходимо. Вы также можете полностью удалить фото"
+
+#: templates/wagtailimages/multiple/add.html:46
+msgid ""
+"Upload successful. However, your new image seems to be a duplicate of this "
+"existing image. You may delete it if it wasn't required."
+msgstr "Загрузка прошла успешно. Однако, загруженное изображение может быть дубликатом уже имеющегося. Вы можете удалить фото при необходимости"
+
+#: templates/wagtailimages/multiple/add.html:48
+msgid "Sorry, upload failed."
+msgstr "Ошибка загрузки"
+
+#: templates/wagtailimages/multiple/add.html:50
+msgid "Server Error"
+msgstr "Ошибка сервера"
+
+#: templates/wagtailimages/multiple/add.html:51
+msgid ""
+"Report this error to your website administrator with the following "
+"information:"
+msgstr ""
+
+#: templates/wagtailimages/multiple/add.html:54
+msgid "Image updated."
+msgstr "Изображение обновлено"
+
+#: utils.py:4
+msgid "bytes"
+msgstr "байт"
+
+#: utils.py:5
+msgid "KB"
+msgstr "KB"
+
+#: utils.py:6
+msgid "MB"
+msgstr "MB"
+
+#: utils.py:7
+msgid "GB"
+msgstr "GB"
+
+#: utils.py:8
+msgid "TB"
+msgstr "TB"
+
+#: utils.py:9
+msgid "PB"
+msgstr "PB"
+
+#: utils.py:10
+msgid "EB"
+msgstr "EB"
+
+#: wagtail_hooks.py:60
+msgid "New"
+msgstr "Новый"
+
+#: wagtail_hooks.py:61
+msgid "Wait processing"
+msgstr "В ожидании обработки"
+
+#: wagtail_hooks.py:62
+msgid "In progress"
+msgstr "В процессе обработки"
+
+#: wagtail_hooks.py:63
+msgid "Ready"
+msgstr "Обработан"
+
+#: wagtail_hooks.py:64
+msgid "Fail"
+msgstr "Ошибка"
+
+#: wagtail_hooks.py:71
+msgid "Winter"
+msgstr "Зима"
+
+#: wagtail_hooks.py:72
+msgid "Spring"
+msgstr "Весна"
+
+#: wagtail_hooks.py:73
+msgid "Summer"
+msgstr "Лето"
+
+#: wagtail_hooks.py:74
+msgid "Fall"
+msgstr "Осень"
+
+#: wagtail_hooks.py:81
+msgid "Night"
+msgstr "Ночь"
+
+#: wagtail_hooks.py:82
+msgid "Morning"
+msgstr "Утро"
+
+#: wagtail_hooks.py:83
+msgid "Day"
+msgstr "День"
+
+#: wagtail_hooks.py:84
+msgid "Evening"
+msgstr "Вечер"
+
+#: wagtail_hooks.py:91
+msgid "Horizontal"
+msgstr "Горизонтальная"
+
+#: wagtail_hooks.py:92
+msgid "Vertical"
+msgstr "Вертикальная"
+
+#: wagtail_hooks.py:93
+msgid "Square"
+msgstr "Квадрат"
+
+#: wagtail_hooks.py:127
+msgid "Tags"
+msgstr "Теги"
+
+#: wagtail_hooks.py:133
+msgid "Status"
+msgstr ""
+
+#: wagtail_hooks.py:137
+msgid "Improved quality"
+msgstr "Качество улучшено"
+
+#: wagtail_hooks.py:145
+msgid "File size"
+msgstr "Размер файла"
+
+#: wagtail_hooks.py:184
+msgid "Photobank"
+msgstr "Фотобанк"
+
+#, fuzzy
+#~| msgid "Recover"
+#~ msgid "Yes, recover"
+#~ msgstr "Восстановить"
+
+#~ msgid "Deleted photos"
+#~ msgstr "Удаленные фотографии"

@@ -9,11 +9,11 @@ from photobank.models import Photo
 class RecoverView(DeleteView):
     model = Photo
     page_title = _("Recover Photo")
-    index_url_name = 'photobank_photos_modeladmin_index'
-    delete_url_name = 'photobank_deleted_modeladmin_recover'
+    index_url_name = 'photobank_hidden_modeladmin_index'
+    delete_url_name = 'photobank_hidden_modeladmin_recover'
     success_url = 'photobank_photos_modeladmin_list'
     success_message = gettext_lazy("%(model_name)s '%(object)s' recovered.")
-    template_name = 'photobank/recover_photo_view.html'
+    template_name = 'recover_photo_view.html'
 
     def delete_action(self):
         """Переопределяем delete action под recover"""
