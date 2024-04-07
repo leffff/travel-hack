@@ -20,7 +20,7 @@ app = FastAPI()
 
 device = 'cuda'
 
-link = "https://01b3-109-252-98-213.ngrok-free.app"
+link = "https://b047-109-252-103-15.ngrok-free.app/"
 translator = Translator(link)
 
 clickhouse = ClickHouse(
@@ -55,12 +55,12 @@ class AddParams(BaseModel):
 
 @app.post("/retriever/add")
 def retriever_add(params: AddParams):
-    retriever.add(
+    response = retriever.add(
         id=params.id,
         img_url=params.img_url,
         name=params.img_name
     )
-    return {"status": "ok"}
+    return response
 
 
 class EditParams(BaseModel):

@@ -31,7 +31,7 @@ class RecSysParams(BaseModel):
 rec_system = RecSys()
 
 
-@app.post("/recommend_photos/")
+@app.post("/recsys/")
 def recommend(params: RecSysParams):
     img_ids = rec_system.get_ids(params.user_texts)
 

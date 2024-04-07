@@ -31,8 +31,9 @@ class LLMBrowser:
         retriever_df = self.retriever_query(request)
 
         en_answer = self.generate(request, retriever_df["name"].tolist(), doc, max_new_tokens)
-        ru_answer = self.out_translate(en_answer) + "\n".join(retriever_df["img_url"].tolist())
-        return ru_answer
+        ru_answer = self.out_translate(en_answer)
+
+        return ru_answer, retriever_df["id"].tolist(), retriever_df["img_url"].tolist()
 
     def in_translate(self, text):
         source_lang = self.translator.detect_lang(text)
@@ -57,20 +58,29 @@ class LLMBrowser:
         return text
 
     def retriever_query(self, text: str):
-        retrieved = self.retriever.query(text=text)
+        retrieved = self.retriever.query(text=text, k=3)
         # print(retrieved, "INSIDE LLM")
-        return pd.DataFrame(retrieved)[["name", "img_url"]]
+        return pd.DataFrame(retrieved)[["name", "img_url", "id"]]
 
     @torch.inference_mode()
     def generate(self, request, retrieved, doc, max_new_tokens):
+
         content = f"""
         Hey, Mistral! You now live in Russia, therefore answer all questions in context of Russia, Moscow only. 
         Please answer the following question: {request}\n
         using this document: {doc}. \n
         Also you can use the places in Moscow retrieved from our DataBase (this may help you):""" + \
-        '\n'.join([f"{i}. " + retrieved[i] for i in retrieved]) + "\n" \
+        '\n'.join([f"{i}. " + i for i in retrieved]) + "\n" \
         "Do not mention the source" + "\n"\
         "Generate the answer in MarkDown format"
+
+        content = f"""
+        Hey, Mistral! You now live in Russia, therefore answer all questions in context of Russia, Moscow only. 
+        Please answer the following question: {request}\n
+        using this document: {doc}. \n
+        Also you can use the places in Moscow retrieved from our DataBase (this may help you):""" + \
+        '\n'.join([f"{i}. " + i for i in retrieved]) + "\n" \
+        "Do not mention the source"
 
         messages = [
             {"role": "user", "content": content, }

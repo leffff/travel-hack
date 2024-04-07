@@ -121,6 +121,7 @@ class ClickHouse:
         request = f"""SELECT
             id,
             img_url,
+            name,
             cosineDistance(image_embedding, {str(embedding[0].tolist())}) AS score
             FROM misis.images_embeddings_db
             WHERE hidden = False
@@ -276,7 +277,7 @@ class Retriever:
         return embedding / embedding.norm(dim=-1, keepdim=True)
 
     @staticmethod
-    def _paths_to_images(path):
+    def _path_to_images(path):
         image = Image.open(path)
         return image
 
@@ -292,15 +293,15 @@ class Retriever:
         image_embedding = self.normalize_embedding(self.get_image_latents([image]))
         name_embedding = self.normalize_embedding(self.get_text_latents([name]).cpu())
         filters = self.get_filters(img_url, image, image_embedding)
-        orientation_filter, extention_filter, daytime_filter, season_filter = filters
+        orientation_filter, extension_filter, daytime_filter, season_filter = filters
 
         image_embedding = image_embedding.cpu()
 
         tags = self.get_tags(image)
-        joined_tags = self.join_tags(tags)
-        tags_text = self.translate(joined_tags)
+        ru_tags = list(map(self.translate, tags))
+        tags_text = self.join_tags(ru_tags)
+
         tags_embedding = self.normalize_embedding(self.get_text_latents([tags_text]).cpu())
-        # print(filters)
 
         embedding = self.image_weigth * image_embedding + self.name_weight * name_embedding + self.tags_weight * tags_embedding
 
@@ -318,9 +319,9 @@ class Retriever:
             "name_embedding": name_embedding[0].tolist(),
             "tags_embedding": tags_embedding[0].tolist(),
             "embedding": embedding[0].tolist(),
-            "tags": tags,
+            "tags": ru_tags,
             "orientation_filter": orientation_filter,
-            "extension_filter": extention_filter,
+            "extension_filter": extension_filter,
             "daytime_filter": daytime_filter,
             "season_filter": season_filter,
             "hidden": False
@@ -328,7 +329,16 @@ class Retriever:
 
         self.clickhouse.add(json)
 
-        return dupl_ids
+        return {
+            "dupl_ids": dupl_ids,
+            "tags": ru_tags,
+            "filters": {
+                "orientation_filter": orientation_filter,
+                "extension_filter": extension_filter,
+                "daytime_filter": daytime_filter,
+                "season_filter": season_filter
+            }
+        }
 
     def edit(self, id, name=None, tags: list = None, filters: dict = None):
         json = {
@@ -341,7 +351,7 @@ class Retriever:
             "embedding": None,
             "tags": None,
             "orientation_filter": None,
-            "extention_filter": None,
+            "extension_filter": None,
             "daytime_filter": None,
             "season_filter": None,
             "hidden": False
@@ -383,13 +393,13 @@ class Retriever:
         if H > W:
             return "vertical"
         elif H < W:
-            return "horizontel"
+            return "horizontal"
         else:
             return "square"
 
-    def get_extention_filter(self, img_url):
+    def get_extension_filter(self, img_url):
         extension = urlparse(img_url).path.strip("/").rsplit(".", 1)[-1]
-        return extension
+        return extension.lower()
 
     def get_daytime_filter(self, img_latent):
         scores = self.cos(img_latent.cpu(), self.daytime_embeddings.cpu()).softmax(dim=0)
@@ -403,11 +413,11 @@ class Retriever:
 
     def get_filters(self, img_url, image, img_latents):
         orientation_filter = self.get_orientation_filter(image)
-        extention_filter = self.get_extention_filter(img_url)
+        extension_filter = self.get_extension_filter(img_url)
         daytime_filter = self.get_daytime_filter(img_latents)
         season_filter = self.get_season_filter(img_latents)
 
-        return orientation_filter, extention_filter, daytime_filter, season_filter
+        return orientation_filter, extension_filter, daytime_filter, season_filter
 
     def get_tags(self, image):
         tags = self.tagger(image)

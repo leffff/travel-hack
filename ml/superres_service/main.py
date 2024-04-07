@@ -1,3 +1,4 @@
+import hashlib
 from io import BytesIO
 
 from fastapi import FastAPI, File, UploadFile
@@ -30,6 +31,19 @@ def get_extention(img_url):
     return extension
 
 
+def get_image_hash(filelike):
+    filelike.seek(0)
+
+    hasher = hashlib.sha1()
+    while True:
+        data = filelike.read(2**18)
+        if not data:
+            break
+        hasher.update(data)
+
+    return hasher.hexdigest()
+
+
 @app.post("/superres/")
 def superres(params: SuperResRequestParams):
     result = superres_model(source_url=params.source_img_url)
@@ -47,4 +61,4 @@ def superres(params: SuperResRequestParams):
     H, W = result.height, result.width
     size = fd.tell()
 
-    return {"status": "ok", "h": H, "w": W, "size": size}
+    return {"status": "ok", "h": H, "w": W, "size": size, "hash": get_image_hash(fd)}

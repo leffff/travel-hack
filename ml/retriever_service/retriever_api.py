@@ -4,7 +4,7 @@ import requests
 
 
 class RetrieverAPI:
-    def __init__(self, link: str = 'https://2f78-217-151-229-24.ngrok-free.app/retriever/query'):
+    def __init__(self, link: str = 'https://9771-217-151-229-24.ngrok-free.app/retriever/query'):
         self.link = link
 
     def query(self, img_url: str = None, text: str = None, tags: List[str] = None,  filters: dict = None, k: int = 5):
@@ -15,7 +15,7 @@ class RetrieverAPI:
             "filters": filters,
             "k": k
         }
-
         r = requests.post(self.link, json=json)
+
 
         return r.json()

@@ -34,7 +34,7 @@ model = AutoModelForCausalLM.from_pretrained(
 
 tokenizer = AutoTokenizer.from_pretrained(model_name, add_bos_token=True, trust_remote_code=True)
 
-link = "https://01b3-109-252-98-213.ngrok-free.app"
+link = "https://b047-109-252-103-15.ngrok-free.app/"
 translator = Translator(link)
 
 retriever = RetrieverAPI()
@@ -44,5 +44,5 @@ llmbrowser = LLMBrowser(model, tokenizer, retriever, translator)
 
 @app.post("/llm_browser/")
 def llm_browser(params: LLMBrowserRequestParams):
-    result = llmbrowser(params.request, params.max_new_tokens)
-    return {"result": result}
+    text_result, img_ids, img_urls = llmbrowser(params.request, params.max_new_tokens)
+    return {"text_result": text_result, "img_ids": img_ids, "img_urls": img_urls}
